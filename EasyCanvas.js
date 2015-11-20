@@ -9,12 +9,14 @@
 	var CanvasObj = function (canvasId) {
 	    this.canvas = document.getElementById(canvasId);
 	    this.ctx = this.canvas.getContext("2d");
-	};
-
-	var defaults = {
-		color: "#000",
-		startPoint: {x: 0, y: 0},
-		endPoint: {x: 0, y: 0}
+	    this.defaults = {
+			color: "#000",
+			points: [[0, 0], [0, 0]],
+			filled: false,
+			closed: false,
+			lineCap: "butt",	//round, square
+			lineWidth: 1
+		};
 	};
 
 	// Utility method to extend defaults with user options
@@ -30,17 +32,24 @@
 
 	CanvasObj.prototype = {
 		drawLine: function (settings) {
-			var opt = extendDefaults({
-				color: "#000",
-				startPoint: {x: 0, y: 0},
-				endPoint: {x: 0, y: 0}
-			}, settings);
-			// var opt = $.extend(defaults, settings);
-// console.log(opt);
+			var opt = extendDefaults(this.defaults , settings);
+console.log(opt);
 			this.ctx.beginPath();
-			this.ctx.moveTo(opt.startPoint.x, opt.startPoint.y);
-			this.ctx.lineTo(opt.endPoint.x, opt.endPoint.y);
+			this.ctx.lineCap = opt.lineCap;
+			// this.ctx.lineCap="round";
+			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
+			for (var i = 1; i < opt.points.length; i++) {
+				this.ctx.lineTo(opt.points[i][0], opt.points[i][1]);
+			};
+			if (opt.closed) {
+				console.log("close");
+				this.ctx.lineTo(opt.points[0][0], opt.points[0][1]);
+			};
+			if (opt.filled) {
+				this.ctx.fill();
+			};
 			this.ctx.strokeStyle = opt.color;
+			this.ctx.lineWidth = opt.lineWidth;
 			this.ctx.stroke();
 			this.ctx.closePath();
 			return this;

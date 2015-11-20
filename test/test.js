@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    var a = new EasyCanvas("canvas");
+// $(document).ready(function() {
+/*    var a = new EasyCanvas("canvas");
     a.drawLine({
         color: "#f00",
         startPoint: {x: 20, y: 20},
@@ -8,10 +8,12 @@ $(document).ready(function() {
     	color: "#00f",
     	startPoint: {x: 50,	y: 50},
         endPoint: {x: 0, y: 60}
-    });
-console.log("====");
+    });*/
+// console.log("====");
     var b = new EasyCanvas("canvas2");
     b.drawLine({
-    	startPoint: {x: 10,	y: 50}
+    	points: [[0, 100], [100, 100]],
+        lineCap: "round",
+        lineWidth: 10
     });
-});
+// });
