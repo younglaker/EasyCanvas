@@ -11,11 +11,12 @@
 	    this.ctx = this.canvas.getContext("2d");
 	    this.defaults = {
 			color: "#000",
-			points: [[0, 0], [0, 0]],
-			filled: false,
 			closed: false,
+			fillColor: "transparent",
+			filled: false,
 			lineCap: "butt",	//round, square
-			lineWidth: 1
+			lineWidth: 1,
+			points: [[0, 0], [0, 0]]
 		};
 	};
 
@@ -33,10 +34,11 @@
 	CanvasObj.prototype = {
 		drawLine: function (settings) {
 			var opt = extendDefaults(this.defaults , settings);
-console.log(opt);
-			this.ctx.beginPath();
+			console.log(opt);
+			this.ctx.strokeStyle = opt.color;
+			this.ctx.lineWidth = opt.lineWidth;
 			this.ctx.lineCap = opt.lineCap;
-			// this.ctx.lineCap="round";
+			this.ctx.fillStyle = opt.fillColor;
 			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
 			for (var i = 1; i < opt.points.length; i++) {
 				this.ctx.lineTo(opt.points[i][0], opt.points[i][1]);
@@ -47,9 +49,7 @@ console.log(opt);
 			};
 			if (opt.filled) {
 				this.ctx.fill();
-			};
-			this.ctx.strokeStyle = opt.color;
-			this.ctx.lineWidth = opt.lineWidth;
+			};			
 			this.ctx.stroke();
 			this.ctx.closePath();
 			return this;
