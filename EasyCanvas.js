@@ -17,6 +17,7 @@
 			lineCap: "butt",	//round, square
 			lineWidth: 1,
 			points: [[0, 0], [0, 0]],
+			text: null,
 			shadow:[[0,"#FFF"]]
 		};
 	};
@@ -64,13 +65,33 @@
 			console.log(opt);
 			this.ctx.strokeStyle = opt.color;
 			this.ctx.lineWidth = opt.lineWidth;
-			this.ctx.arc(opt.points[0][0], opt.points[0][1],opt.points[0][2],opt.points[1][0],opt.points[1][1]*Math.PI);
+			this.ctx.arc(opt.points[0][0], opt.points[0][1], opt.points[0][2],opt.points[1][0], opt.points[1][1] * Math.PI);
+
 			this.ctx.shadowBlur = opt.shadow[0][0];
 			this.ctx.shadowColor = opt.shadow[0][1];
 			if (opt.filled) {
 				this.ctx.fill();
 			};
+
 			this.ctx.stroke();
+
+			return this;
+		},
+		drawText: function (settings) {
+			var opt = extendDefaults(this.defaults , settings);
+			console.log(opt);
+			this.ctx.strokeStyle = opt.color;
+
+			this.ctx.font = opt.font;
+
+			this.ctx.shadowBlur = opt.shadow[0][0];
+			this.ctx.shadowColor = opt.shadow[0][1];
+			if (opt.filled) {
+				this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
+			}else {
+				this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
+			};
+
 			return this;
 		},
 
