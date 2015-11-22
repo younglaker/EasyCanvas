@@ -10,13 +10,13 @@ $(document).ready(function() {
         endPoint: {x: 0, y: 60}
     });*/
 // console.log("====");
-    var b = new EasyCanvas("canvas2");
-    b.drawLine({
-    	points: [[10, 100], [200, 100], [10, 200]],
-        lineCap: "round",
-        lineWidth: 10,
-        filled: true,
-        fillColor: "rgb(255,165,0)",
-        closed: true
-    });
+var b = new EasyCanvas("canvas2");
+b.drawLine({
+  points: [[10, 100], [200, 100], [10, 200]],
+    lineCap: "round",
+    lineWidth: 10,
+    filled: true,
+    fillColor: "rgb(255,165,0)",
+    closed: true
+});
 });
