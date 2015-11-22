@@ -10,15 +10,16 @@
 	    this.canvas = document.getElementById(canvasId);
 	    this.ctx = this.canvas.getContext("2d");
 	    this.defaults = {
-			color: "#000",
 			closed: false,
 			fillColor: "transparent",
 			filled: false,
+			fontColor: "#000",
 			lineCap: "butt",	//round, square
 			lineWidth: 1,
 			points: [[0, 0], [0, 0]],
-			text: null,
-			shadow:[[0,"#FFF"]]
+			strokeColor: "#000",
+			shadow:[[0,"#FFF"]],
+			text: null
 		};
 	};
 
@@ -37,21 +38,21 @@
 		drawLine: function (settings) {
 			var opt = extendDefaults(this.defaults , settings);
 			console.log(opt);
-			this.ctx.strokeStyle = opt.color;
+			this.ctx.strokeStyle = opt.strokeColor;
 			this.ctx.lineWidth = opt.lineWidth;
 			this.ctx.lineCap = opt.lineCap;
 			this.ctx.fillStyle = opt.fillColor;
 			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
 			for (var i = 1; i < opt.points.length; i++) {
 				this.ctx.lineTo(opt.points[i][0], opt.points[i][1]);
-			};
+			}
 			if (opt.closed) {
 				console.log("close");
 				this.ctx.lineTo(opt.points[0][0], opt.points[0][1]);
-			};
+			}
 			if (opt.filled) {
 				this.ctx.fill();
-			};
+			}
 			this.ctx.shadowBlur = opt.shadow[0][0];
 			this.ctx.shadowColor = opt.shadow[0][1];
 
@@ -60,10 +61,11 @@
 
 			return this;
 		},
+
 		drawArc: function (settings) {
-			var opt = extendDefaults(this.defaults , settings);
+			var opt = extendDefaults(this.defaults, settings);
 			console.log(opt);
-			this.ctx.strokeStyle = opt.color;
+			this.ctx.strokeStyle = opt.strokeColor;
 			this.ctx.lineWidth = opt.lineWidth;
 			this.ctx.arc(opt.points[0][0], opt.points[0][1], opt.points[0][2],opt.points[1][0], opt.points[1][1] * Math.PI);
 
@@ -71,33 +73,32 @@
 			this.ctx.shadowColor = opt.shadow[0][1];
 			if (opt.filled) {
 				this.ctx.fill();
-			};
+			}
 
 			this.ctx.stroke();
 
 			return this;
 		},
-		drawText: function (settings) {
-			var opt = extendDefaults(this.defaults , settings);
-			console.log(opt);
-			this.ctx.strokeStyle = opt.color;
 
+		drawText: function (settings) {
+			var opt = extendDefaults(this.defaults, settings); console.log(opt);
+			this.ctx.fillStyle = opt.fontColor;
 			this.ctx.font = opt.font;
 
 			this.ctx.shadowBlur = opt.shadow[0][0];
 			this.ctx.shadowColor = opt.shadow[0][1];
+
 			if (opt.filled) {
 				this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
-			}else {
+			} else {
 				this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
-			};
+			}
 
 			return this;
 		},
 
-
 		drawRect: function (argument) {
 			// body...
 		}
-	}
+	};
 }(window));
