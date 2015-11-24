@@ -19,20 +19,25 @@ $(document).ready(function() {
         fillColor: "rgb(255, 165, 0)",
         closed: true
     });*/
-
+/*
     b.drawText({
         points: [[00, 100]],
         lineWidth: 10,
         shadow: [7, "#0f0"],
         linerGradient: [0, 0, 170, 0],
         stop: [[0, "black"], [0.3,"magenta"],[0.5,"blue"],[0.6,"green"],[0.8,"yellow"],[1,"red"]],
-        font: "30px Arial Black",
+        font: "50px Arial Black",
         text: "Hello World",
         strokeText: true
-    });
+    }).clear();*/
 
 /*    b.drawRect({
         points: [[20,20],[150,100]],
         linerGridient: [0, 0, 170, 0]
     });*/
+
+    b.drawRect({
+        fillColor: "#000"
+    })
+    .clear(20, 20, 100, 100);
 });

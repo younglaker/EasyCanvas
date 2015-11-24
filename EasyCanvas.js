@@ -169,9 +169,9 @@
 		*/
 		drawRect: function (settings) {
 			var opt = _extendDefaults(this.defaults , settings);
-
+console.log(_fillStyle(this.ctx, opt));
 			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
-			this.ctx.fillRect(10, 10, 150, 100);
+			this.ctx.fillRect(10, 10, 300, 300);
 
 			_renewDefaults(this.defaults, g_defaults);
 
@@ -226,6 +226,14 @@
 			}
 
 			return this;
+		},
+
+		clear: function () {
+		    if (arguments[0]) {
+		    	this.ctx.clearRect(arguments[0], arguments[1], arguments[2], arguments[3]);
+		    } else {
+		    	this.ctx.clearRect(0, 0, this.width, this.height);
+		    }
 		}
 	};
 

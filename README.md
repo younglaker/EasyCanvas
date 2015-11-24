@@ -6,7 +6,9 @@ A HTML5 canvas library based on pure JavaScript.
 
 ## Init
 
-	var a = new EasyCanvas("canvasid");
+	<canvas id="canvas" width="550" height="500"></canvas>
+	
+	var A = new EasyCanvas("canvasid");
 
 ## Settings
 
@@ -28,12 +30,19 @@ A HTML5 canvas library based on pure JavaScript.
 | stop | Arrays | [[0, "black"], [1, "white"]] | [[n1, "color"], [n2, "color"]...[nx, "color"]]<br>n: Between 0.0 and 1.0 that represents the position between start and end in a gradient<br>n: 在0和1之间，渐变停留的位置 |
 |  |  |  |  |
 
+## Variable
+
+| Property | Description | Example |
+|---|---|---|
+| width | The width of canvas | var w = A.width |
+| height | The height of canvas | var w = A.height |
+
 ## Drawing
 ### Line: drawLine()
 
 Example:
 
-    a.drawLine({
+    A.drawLine({
         closed: true,
         lineCap: "round",
         lineWidth: 10,
@@ -48,7 +57,7 @@ Example:
 
 ### Text: drawText()
 
-    a.drawText({
+    A.drawText({
         points: [[00, 100]],
         lineWidth: 10,
         shadow: [7, "#0f0"],
@@ -71,7 +80,7 @@ Draw the coordinate of canvas in order to use canvas easierly.
 | color | Css color  | "#000"  | The color of line and text  |
 
 ```
-a.coordinate();
+A.coordinate();
 
-a.coordinate(100, true, "rgb(255, 165, 0)");
+A.coordinate(100, true, "rgb(255, 165, 0)");
 ```
