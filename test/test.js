@@ -20,15 +20,19 @@ $(document).ready(function() {
         closed: true
     });*/
 
-
-    b.coordinate(50, true, "#eee")
-     .drawText({
-        points: [[100, 100]],
+    b.drawText({
+        points: [[00, 100]],
         lineWidth: 10,
-        shadow: [7,"#0f0"],
-        fontColor: "#f00",
-        font: "50px Arial Black",
+        shadow: [7, "#0f0"],
+        linerGradient: [0, 0, 170, 0],
+        stop: [[0, "black"], [0.3,"magenta"],[0.5,"blue"],[0.6,"green"],[0.8,"yellow"],[1,"red"]],
+        font: "30px Arial Black",
         text: "Hello World",
         strokeText: true
     });
+
+/*    b.drawRect({
+        points: [[20,20],[150,100]],
+        linerGridient: [0, 0, 170, 0]
+    });*/
 });

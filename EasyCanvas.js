@@ -5,19 +5,24 @@
 	};
 
 	var CanvasObj = function (canvasId) {
-	    this.canvas = document.getElementById(canvasId);
-	    this.ctx = this.canvas.getContext("2d");
-	    this.defaults = {
+		this.canvas = document.getElementById(canvasId);
+		this.ctx = this.canvas.getContext("2d");
+		this.width = this.canvas.width;
+		this.height = this.canvas.height;
+		this.defaults = {
 			closed: false,
 			fillColor: "transparent",
 			fontColor: "#000",
 			fontStrock: false,
 			lineCap: "butt",
 			lineWidth: 1,
+			linerGradient: false,
 			points: [[0, 0], [0, 0]],
-			shadow:[0,"#FFF"],
+			radialGradient: false,
+			shadow:[0, "#FFF"],
 			strokeText: false,
 			strokeColor: "#000",
+			stop: [[0, "black"], [1, "white"]],
 			text: null
 		};
 	};
@@ -29,17 +34,20 @@
 		fontStrock: false,
 		lineCap: "butt",
 		lineWidth: 1,
+		linerGradient: false,
 		points: [[0, 0], [0, 0]],
-		shadow:[0,"#FFF"],
+		radialGradient: false,
+		shadow:[0, "#FFF"],
 		strokeText: false,
 		strokeColor: "#000",
-		text: "Test"
+		stop: [[0, "black"], [1, "white"]],
+		text: null
 	};
 
 	/*
 	*  Extend defaults with user options
 	*/
-	function extendDefaults(source, settings) {
+	function _extendDefaults (source, settings) {
 		var property;
 		for (property in settings) {
 			if (settings.hasOwnProperty(property)) {
@@ -52,8 +60,30 @@
 	/*
 	*  Renew defaults with original defaults
 	*/
-	function renewDefaults(source, ori_defaults) {
+	function _renewDefaults (source, ori_defaults) {
 		return source = ori_defaults;
+	}
+		
+	/*
+	*  Deal with fillStyle for color/gridient/patten
+	*/
+	function _fillStyle (ctx, opt) {
+		if (opt.linerGradient) {
+			var coord = opt.linerGradient;
+			var grd = ctx.createLinearGradient(coord[0], coord[1], coord[2], coord[3]);
+
+			for (var i = 0; i < opt.stop.length; i++) {
+				grd.addColorStop(opt.stop[i][0], opt.stop[i][1]);
+			}
+
+			return grd;
+
+		} else if (opt.radialGradient) {
+			return true;
+
+		} else {
+			return opt.fillColor;
+		}
 	}
 
 	CanvasObj.prototype = {
@@ -61,30 +91,33 @@
 		*  Draw line
 		*/
 		drawLine: function (settings) {
-			var opt = extendDefaults(this.defaults , settings);
+			var opt = _extendDefaults(this.defaults , settings);
 			
 			this.ctx.strokeStyle = opt.strokeColor;
 			this.ctx.lineWidth = opt.lineWidth;
 			this.ctx.lineCap = opt.lineCap;
-			this.ctx.fillStyle = opt.fillColor;
+			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
 			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
+
 			for (var i = 1; i < opt.points.length; i++) {
 				this.ctx.lineTo(opt.points[i][0], opt.points[i][1]);
 			}
+
 			if (opt.closed) {
-				console.log("close");
 				this.ctx.lineTo(opt.points[0][0], opt.points[0][1]);
 			}
+
 			if (opt.filled) {
 				this.ctx.fill();
 			}
-			this.ctx.shadowBlur = opt.shadow[0][0];
-			this.ctx.shadowColor = opt.shadow[0][1];
+
+			this.ctx.shadowBlur = opt.shadow[0];
+			this.ctx.shadowColor = opt.shadow[1];
 
 			this.ctx.stroke();
 			this.ctx.closePath();
 
-			renewDefaults(this.defaults, g_defaults);
+			_renewDefaults(this.defaults, g_defaults);
 
 			return this;
 		},
@@ -93,7 +126,7 @@
 		*  Draw arc
 		*/
 		drawArc: function (settings) {
-			var opt = extendDefaults(this.defaults, settings);
+			var opt = _extendDefaults(this.defaults, settings);
 			
 			this.ctx.strokeStyle = opt.strokeColor;
 			this.ctx.lineWidth = opt.lineWidth;
@@ -114,19 +147,19 @@
 		*  Draw text
 		*/
 		drawText: function (settings) {
-			var opt = extendDefaults(this.defaults, settings);
+			var opt = _extendDefaults(this.defaults, settings);
 
-			this.ctx.fillStyle = opt.fontColor;
+			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
 			this.ctx.font = opt.font;
 			this.ctx.shadowBlur = opt.shadow[0];
 			this.ctx.shadowColor = opt.shadow[1];
-
 			this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
+
 			if (opt.strokeText) {
 				this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
 			}
 			
-			renewDefaults(this.defaults, g_defaults);
+			_renewDefaults(this.defaults, g_defaults);
 
 			return this;
 		},
@@ -134,14 +167,25 @@
 		/*
 		*  Draw rectangle
 		*/
-		drawRect: function (argument) {
-			// body...
+		drawRect: function (settings) {
+			var opt = _extendDefaults(this.defaults , settings);
+
+			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
+			this.ctx.fillRect(10, 10, 150, 100);
+
+			_renewDefaults(this.defaults, g_defaults);
+
+			return this;
 		},
 
 		/*
 		*  Draw layer coordinate
 		*/
 		coordinate: function (grid_width, coodiful, color) {
+			grid_width = grid_width || 50;
+			coodiful = coodiful || false;
+			color = color || "#000";
+
 			var cs_width = this.canvas.width;
 			var cs_height = this.canvas.height;
 			var x = cs_width / grid_width;
@@ -168,13 +212,13 @@
 				}
 
 			} else {
-				for (var i = 0; i <= x; i++) {
-				    this.drawLine({
-				        points: [[i * grid_width, 0], [i * grid_width, y * grid_width]]
+				for (var i = 0; i <= x; i++) {  //绘制列
+					this.drawLine({
+						points: [[i * grid_width, 0], [i * grid_width, y * grid_width]]
 				    });
 				}
 
-				for (var i = 0; i <= y; i++) {
+				for (var i = 0; i <= y; i++) {  //绘制行
 				    this.drawLine({
 				        points: [[0, i * grid_width], [x * grid_width, i * grid_width]]
 				    });
