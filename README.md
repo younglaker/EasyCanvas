@@ -40,7 +40,7 @@ A HTML5 canvas library based on pure JavaScript.
 ## Drawing
 ### Line: drawLine()
 
-Example:
+**Example:**
 
     A.drawLine({
         closed: true,
@@ -56,6 +56,8 @@ Example:
 ### Rectangle: drawRect()
 
 ### Text: drawText()
+
+**Example:**
 
     A.drawText({
         points: [[00, 100]],
@@ -79,8 +81,27 @@ Draw the coordinate of canvas in order to use canvas easierly.
 | coodiful | Bool  | false  | Whether show the coordinate |
 | color | Css color  | "#000"  | The color of line and text  |
 
-```
-A.coordinate();
+**Example:**
 
-A.coordinate(100, true, "rgb(255, 165, 0)");
-```
+	A.coordinate(); // Draw the whole canvas
+
+	A.coordinate(100, true, "rgb(255, 165, 0)");
+
+### Clean canvas: clear(x, y, width, heigh);
+
+| Property | Value  | Default  |   Description  |
+|---|---|---|---|
+| x, y | Number |  | The coordinate of start point |
+| width, heigh | Number |  | The width and heigh of the rectangle |
+
+**Example:**
+
+    b.drawRect({
+        fillColor: "#000"
+    })
+    .clear();  // Clean the whole canvas
+
+    b.drawRect({
+        fillColor: "#000"
+    })
+    .clear(20, 20, 100, 100);  // Clean the some parts

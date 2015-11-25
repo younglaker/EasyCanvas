@@ -69,17 +69,24 @@
 	*/
 	function _fillStyle (ctx, opt) {
 		if (opt.linerGradient) {
-			var coord = opt.linerGradient;
-			var grd = ctx.createLinearGradient(coord[0], coord[1], coord[2], coord[3]);
+			var parameter = opt.linerGradient;
+			var liner_grd = ctx.createLinearGradient(parameter[0], parameter[1], parameter[2], parameter[3]);
 
 			for (var i = 0; i < opt.stop.length; i++) {
-				grd.addColorStop(opt.stop[i][0], opt.stop[i][1]);
+				liner_grd.addColorStop(opt.stop[i][0], opt.stop[i][1]);
 			}
 
-			return grd;
+			return liner_grd;
 
 		} else if (opt.radialGradient) {
-			return true;
+			var parameter = opt.radialGradient;
+			var radial_grd = ctx.createLinearGradient(parameter[0], parameter[1], parameter[2], parameter[3], parameter[4], parameter[5]);
+
+			for (var i = 0; i < opt.stop.length; i++) {
+				radial_grd.addColorStop(opt.stop[i][0], opt.stop[i][1]);
+			}
+
+			return radial_grd;
 
 		} else {
 			return opt.fillColor;
@@ -169,7 +176,7 @@
 		*/
 		drawRect: function (settings) {
 			var opt = _extendDefaults(this.defaults , settings);
-console.log(_fillStyle(this.ctx, opt));
+
 			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
 			this.ctx.fillRect(10, 10, 300, 300);
 
