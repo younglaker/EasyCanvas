@@ -105,3 +105,12 @@ Draw the coordinate of canvas in order to use canvas easierly.
         fillColor: "#000"
     })
     .clear(20, 20, 100, 100);  // Clean the some parts
+
+# To-Do
+
+## Functions
+- [ ] Gradient stroke style
+- [ ] Pattern stroke and fill style
+- [ ] rect()
+
+## Bugs
