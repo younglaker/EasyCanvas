@@ -2,6 +2,8 @@
 
 A HTML5 canvas library based on pure JavaScript.
 
+Welcome to join us~
+
 # Documents
 
 ## Init
@@ -34,8 +36,8 @@ A HTML5 canvas library based on pure JavaScript.
 
 | Property | Description | Example |
 |---|---|---|
-| width | The width of canvas | var w = A.width |
-| height | The height of canvas | var w = A.height |
+| width | The width of canvas | var w = A.width; |
+| height | The height of canvas | var h = A.height; |
 
 ## Drawing
 ### Line: drawLine()
@@ -109,8 +111,13 @@ Draw the coordinate of canvas in order to use canvas easierly.
 # To-Do
 
 ## Functions
-- [ ] Gradient stroke style
+- [x] Gradient stroke style
 - [ ] Pattern stroke and fill style
-- [ ] rect()
+- [ ] drawRect()
+- [ ] drawArc()
+
+## Improvements
+
+- [ ] Remove strokeText property
 
 ## Bugs

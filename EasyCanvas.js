@@ -18,6 +18,7 @@
 			lineWidth: 1,
 			fillLinerGradient: false,
 			fillRradialGradient: false,
+			font: "14px Arial Black",
 			points: [[0, 0], [0, 0]],
 			shadow:[0, "#FFF"],
 			strokeText: false,
@@ -25,19 +26,29 @@
 			strokeLinerGradient: false,
 			strokeRradialGradient: false,
 			stop: [[0, "black"], [1, "white"]],
-			text: null
+			text: null,
+			textBaseline: "alphabetic",
+			textAlign: "start"
 		};
+
+		/*
+		*  Renew defaults with original defaults
+		*/
+		this._renewDefaults = function () {
+			this.defaults = g_defaults;
+		}
 	};
 
 	var g_defaults = {
 		closed: false,
 		fillColor: "transparent",
 		fontColor: "#000",
-		fontStrock: false,
+		fontStroke: false,
 		lineCap: "butt",
 		lineWidth: 1,
 		fillLinerGradient: false,
 		fillRradialGradient: false,
+		font: "14px Arial Black",
 		points: [[0, 0], [0, 0]],
 		shadow:[0, "#FFF"],
 		strokeText: false,
@@ -45,7 +56,9 @@
 		strokeLinerGradient: false,
 		strokeRradialGradient: false,
 		stop: [[0, "black"], [1, "white"]],
-		text: null
+		text: null,
+		textBaseline: "alphabetic",
+		textAlign: "start"
 	};
 
 	/*
@@ -59,13 +72,6 @@
 			}
 		}
 		return source;
-	}
-
-	/*
-	*  Renew defaults with original defaults
-	*/
-	function _renewDefaults (source, ori_defaults) {
-		return source = ori_defaults;
 	}
 	
 	/*
@@ -98,7 +104,7 @@
 	}
 
 	/*
-	*  Deal with fillStyle for color/gridient/patten
+	*  Deal with strokeStyle for color/gridient/patten
 	*/
 	function _strokeStyle (ctx, opt) {
 		if (opt.strokeLinerGradient) {
@@ -163,7 +169,8 @@
 			this.ctx.stroke();
 			this.ctx.closePath();
 
-			_renewDefaults(this.defaults, g_defaults);
+			this._renewDefaults();
+			this.defaults = g_defaults;
 
 			return this;
 		},
@@ -185,6 +192,8 @@
 
 			this.ctx.stroke();
 
+			this._renewDefaults();
+
 			return this;
 		},
 
@@ -192,17 +201,21 @@
 		*  Draw text
 		*/
 		drawText: function (settings) {
+			this.defaults.fillColor = "#000";
+			this.defaults.strokeColor = "transparent";
 			var opt = _extendDefaults(this.defaults, settings);
 
 			_setOpt(this.ctx, opt);
 			this.ctx.font = opt.font;
+			this.ctx.textBaseline = opt.textBaseline;
+			this.ctx.textAlign = opt.textAlign;
 			this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
 
 			if (opt.strokeText) {
 				this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
 			}
-			
-			_renewDefaults(this.defaults, g_defaults);
+
+			this._renewDefaults();
 
 			return this;
 		},
@@ -217,7 +230,7 @@
 
 			this.ctx.fillRect(10, 10, 300, 300);
 
-			_renewDefaults(this.defaults, g_defaults);
+			this._renewDefaults();
 
 			return this;
 		},

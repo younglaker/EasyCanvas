@@ -11,18 +11,19 @@ $(document).ready(function() {
     });*/
 // console.log("====");
     var b = new EasyCanvas("canvas2");
-    b.drawLine({
+/*    b.drawLine({
         points: [[10, 100], [200, 100], [10, 200]],
         lineCap: "round",
         lineWidth: 10,
         filled: true,
-        // fillColor: "rgb(255, 165, 0)",
-        strokeLinerGradient: [0, 0, 170, 0],
-        stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
+        fillColor: "rgb(255, 165, 0)",
+        strokeColor: "#00f",
+        // strokeLinerGradient: [0, 0, 170, 0],
+        // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         closed: true
-    });
+    });*/
 
-    b.drawText({
+/*    b.drawText({
         points: [[00, 100]],
         lineWidth: 2,
         shadow: [7, "#0f0"],
@@ -31,14 +32,13 @@ $(document).ready(function() {
         font: "50px Arial Black",
         text: "Hello",
         strokeText: true
-    });
+    });*/
 
 /*    b.drawText({
         points: [[00, 100]],
         shadow: [7, "#0f0"],
         fillRradialGradient: [75, 50, 5, 90, 60, 100],
         stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
-        // fillColor: "#00f",
         strokeColor: "#fff",
         font: "50px Arial Black",
         text: "Hello",
@@ -54,4 +54,34 @@ $(document).ready(function() {
         fillColor: "#000"
     })
     .clean(20, 20, 100, 100);*/
+
+    b.drawLine({
+        points: [[150, 20], [150, 170]]
+    })
+    .drawText({
+        points: [[150, 60]],
+        text: "test test",
+        textAlign: "start",
+    })
+    .drawText({
+        points: [[150, 80]],
+        text: "test test",
+        textAlign: "end",
+    })
+    .drawText({
+        points: [[150, 100]],
+        text: "test test",
+        textAlign: "center",
+    })
+    .drawText({
+        points: [[150, 120]],
+        text: "test test",
+        textAlign: "left",
+    })
+    .drawText({
+        points: [[150, 140]],
+        text: "test test",
+        textAlign: "right",
+    });
+
 });

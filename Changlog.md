@@ -1,6 +1,7 @@
 ## 2015.11.26
 
 - Depart gradient property of fill style and stroke style.
+- **_strokeStyle()**: Deal with strokeStyle for color/gridient/patten
 
 ## 2015.11.25
 
