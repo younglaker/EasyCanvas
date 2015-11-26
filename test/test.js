@@ -16,20 +16,22 @@ $(document).ready(function() {
         lineCap: "round",
         lineWidth: 10,
         filled: true,
-        fillColor: "rgb(255, 165, 0)",
+        // fillColor: "rgb(255, 165, 0)",
+        strokeLinerGradient: [0, 0, 170, 0],
+        stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         closed: true
     });
 
-/*    b.drawText({
+    b.drawText({
         points: [[00, 100]],
         lineWidth: 2,
         shadow: [7, "#0f0"],
-        fillLinerGradient: [0, 0, 170, 0],
+        strokeLinerGradient: [0, 0, 170, 0],
         stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         font: "50px Arial Black",
-        text: "Hello World",
+        text: "Hello",
         strokeText: true
-    });*/
+    });
 
 /*    b.drawText({
         points: [[00, 100]],
@@ -39,7 +41,7 @@ $(document).ready(function() {
         // fillColor: "#00f",
         strokeColor: "#fff",
         font: "50px Arial Black",
-        text: "Hello World",
+        text: "Hello",
         strokeText: true
     });*/
 

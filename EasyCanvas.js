@@ -13,15 +13,17 @@
 			closed: false,
 			fillColor: "transparent",
 			fontColor: "#000",
-			fontStrock: false,
+			fontStroke: false,
 			lineCap: "butt",
 			lineWidth: 1,
 			fillLinerGradient: false,
-			points: [[0, 0], [0, 0]],
 			fillRradialGradient: false,
+			points: [[0, 0], [0, 0]],
 			shadow:[0, "#FFF"],
 			strokeText: false,
 			strokeColor: "#000",
+			strokeLinerGradient: false,
+			strokeRradialGradient: false,
 			stop: [[0, "black"], [1, "white"]],
 			text: null
 		};
@@ -40,6 +42,8 @@
 		shadow:[0, "#FFF"],
 		strokeText: false,
 		strokeColor: "#000",
+		strokeLinerGradient: false,
+		strokeRradialGradient: false,
 		stop: [[0, "black"], [1, "white"]],
 		text: null
 	};
@@ -94,11 +98,40 @@
 	}
 
 	/*
+	*  Deal with fillStyle for color/gridient/patten
+	*/
+	function _strokeStyle (ctx, opt) {
+		if (opt.strokeLinerGradient) {
+			var parameter = opt.strokeLinerGradient;
+			var liner_grd = ctx.createLinearGradient(parameter[0], parameter[1], parameter[2], parameter[3]);
+
+			for (var i = 0; i < opt.stop.length; i++) {
+				liner_grd.addColorStop(opt.stop[i][0], opt.stop[i][1]);
+			}
+
+			return liner_grd;
+
+		} else if (opt.strokeRradialGradient) {
+			var parameter = opt.strokeRradialGradient;
+			var radial_grd = ctx.createRadialGradient(parameter[0], parameter[1], parameter[2], parameter[3], parameter[4], parameter[5]);
+
+			for (var i = 0; i < opt.stop.length; i++) {
+				radial_grd.addColorStop(opt.stop[i][0], opt.stop[i][1]);
+			}
+
+			return radial_grd;
+
+		} else {
+			return opt.strokeColor;
+		}
+	}
+
+	/*
 	*  Set basic style
 	*/
 	function _setOpt (ctx, opt) {
 		ctx.fillStyle = _fillStyle(ctx, opt);
-		ctx.strokeStyle = opt.strokeColor;
+		ctx.strokeStyle = _strokeStyle(ctx, opt);
 		ctx.lineWidth = opt.lineWidth;
 		ctx.lineCap = opt.lineCap;
 		ctx.shadowBlur = opt.shadow[0];
@@ -181,7 +214,7 @@
 			var opt = _extendDefaults(this.defaults , settings);
 
 			_setOpt(this.ctx, opt);
-			
+
 			this.ctx.fillRect(10, 10, 300, 300);
 
 			_renewDefaults(this.defaults, g_defaults);

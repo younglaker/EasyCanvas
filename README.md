@@ -25,8 +25,8 @@ A HTML5 canvas library based on pure JavaScript.
 | strokeText  |  Bool |  false  |  Whether stroke the text<br>(是否开启给文本描边)  |
 | text | Sting  | "Test"  |   Text  |
 | fontColor  | Hex or RGB  | "#000" |  Font color   |
-| linerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient<br>x0、y0 和 x1、y1:	渐变的起始点、结束点 |
-| radialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,	y1:	The starting and end circle of the gradient<br>r0 and r1： The radius of the starting and ending circle<br>x0, y0 和 x1, y1:	渐变的起始、结束点<br>r0 和 r1: 开始和结束的圆的半径|
+| fillLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient<br>x0、y0 和 x1、y1:	填充线性渐变的起始点、结束点 |
+| fillRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,	y1:	The starting and end circle of the gradient<br>r0 and r1： The radius of the starting and ending circle<br>x0, y0 和 x1, y1:	填充圆形渐变的起始、结束点<br>r0 和 r1: 开始和结束的圆的半径|
 | stop | Arrays | [[0, "black"], [1, "white"]] | [[n1, "color"], [n2, "color"]...[nx, "color"]]<br>n: Between 0.0 and 1.0 that represents the position between start and end in a gradient<br>n: 在0和1之间，渐变停留的位置 |
 |  |  |  |  |
 
