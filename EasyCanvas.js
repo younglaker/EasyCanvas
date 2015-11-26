@@ -63,7 +63,7 @@
 	function _renewDefaults (source, ori_defaults) {
 		return source = ori_defaults;
 	}
-		
+	
 	/*
 	*  Deal with fillStyle for color/gridient/patten
 	*/
@@ -93,6 +93,18 @@
 		}
 	}
 
+	/*
+	*  Set basic style
+	*/
+	function _setOpt (ctx, opt) {
+		ctx.fillStyle = _fillStyle(ctx, opt);
+		ctx.strokeStyle = opt.strokeColor;
+		ctx.lineWidth = opt.lineWidth;
+		ctx.lineCap = opt.lineCap;
+		ctx.shadowBlur = opt.shadow[0];
+		ctx.shadowColor = opt.shadow[1];
+	}
+
 	CanvasObj.prototype = {
 		/*
 		*  Draw line
@@ -100,10 +112,7 @@
 		drawLine: function (settings) {
 			var opt = _extendDefaults(this.defaults , settings);
 			
-			this.ctx.strokeStyle = opt.strokeColor;
-			this.ctx.lineWidth = opt.lineWidth;
-			this.ctx.lineCap = opt.lineCap;
-			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
+			_setOpt(this.ctx, opt);
 			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
 
 			for (var i = 1; i < opt.points.length; i++) {
@@ -117,9 +126,6 @@
 			if (opt.filled) {
 				this.ctx.fill();
 			}
-
-			this.ctx.shadowBlur = opt.shadow[0];
-			this.ctx.shadowColor = opt.shadow[1];
 
 			this.ctx.stroke();
 			this.ctx.closePath();
@@ -135,8 +141,7 @@
 		drawArc: function (settings) {
 			var opt = _extendDefaults(this.defaults, settings);
 			
-			this.ctx.strokeStyle = opt.strokeColor;
-			this.ctx.lineWidth = opt.lineWidth;
+			_setOpt(this.ctx, opt);
 			this.ctx.arc(opt.points[0][0], opt.points[0][1], opt.points[0][2],opt.points[1][0], opt.points[1][1] * Math.PI);
 
 			this.ctx.shadowBlur = opt.shadow[0][0];
@@ -156,10 +161,8 @@
 		drawText: function (settings) {
 			var opt = _extendDefaults(this.defaults, settings);
 
-			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
+			_setOpt(this.ctx, opt);
 			this.ctx.font = opt.font;
-			this.ctx.shadowBlur = opt.shadow[0];
-			this.ctx.shadowColor = opt.shadow[1];
 			this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
 
 			if (opt.strokeText) {
@@ -177,7 +180,8 @@
 		drawRect: function (settings) {
 			var opt = _extendDefaults(this.defaults , settings);
 
-			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
+			_setOpt(this.ctx, opt);
+			
 			this.ctx.fillRect(10, 10, 300, 300);
 
 			_renewDefaults(this.defaults, g_defaults);
