@@ -87,7 +87,7 @@ Draw the coordinate of canvas in order to use canvas easierly.
 
 	A.coordinate(100, true, "rgb(255, 165, 0)");
 
-### Clean canvas: clear(x, y, width, heigh);
+### Clean canvas: clean(x, y, width, heigh);
 
 | Property | Value  | Default  |   Description  |
 |---|---|---|---|
@@ -99,12 +99,12 @@ Draw the coordinate of canvas in order to use canvas easierly.
     b.drawRect({
         fillColor: "#000"
     })
-    .clear();  // Clean the whole canvas
+    .clean();  // Clean the whole canvas
 
     b.drawRect({
         fillColor: "#000"
     })
-    .clear(20, 20, 100, 100);  // Clean the some parts
+    .clean(20, 20, 100, 100);  // Clean the some parts
 
 # To-Do
 

@@ -16,9 +16,9 @@
 			fontStrock: false,
 			lineCap: "butt",
 			lineWidth: 1,
-			linerGradient: false,
+			fillLinerGradient: false,
 			points: [[0, 0], [0, 0]],
-			radialGradient: false,
+			fillRradialGradient: false,
 			shadow:[0, "#FFF"],
 			strokeText: false,
 			strokeColor: "#000",
@@ -34,9 +34,9 @@
 		fontStrock: false,
 		lineCap: "butt",
 		lineWidth: 1,
-		linerGradient: false,
+		fillLinerGradient: false,
+		fillRradialGradient: false,
 		points: [[0, 0], [0, 0]],
-		radialGradient: false,
 		shadow:[0, "#FFF"],
 		strokeText: false,
 		strokeColor: "#000",
@@ -63,13 +63,13 @@
 	function _renewDefaults (source, ori_defaults) {
 		return source = ori_defaults;
 	}
-	
+		
 	/*
 	*  Deal with fillStyle for color/gridient/patten
 	*/
 	function _fillStyle (ctx, opt) {
-		if (opt.linerGradient) {
-			var parameter = opt.linerGradient;
+		if (opt.fillLinerGradient) {
+			var parameter = opt.fillLinerGradient;
 			var liner_grd = ctx.createLinearGradient(parameter[0], parameter[1], parameter[2], parameter[3]);
 
 			for (var i = 0; i < opt.stop.length; i++) {
@@ -78,9 +78,9 @@
 
 			return liner_grd;
 
-		} else if (opt.radialGradient) {
-			var parameter = opt.radialGradient;
-			var radial_grd = ctx.createLinearGradient(parameter[0], parameter[1], parameter[2], parameter[3], parameter[4], parameter[5]);
+		} else if (opt.fillRradialGradient) {
+			var parameter = opt.fillRradialGradient;
+			var radial_grd = ctx.createRadialGradient(parameter[0], parameter[1], parameter[2], parameter[3], parameter[4], parameter[5]);
 
 			for (var i = 0; i < opt.stop.length; i++) {
 				radial_grd.addColorStop(opt.stop[i][0], opt.stop[i][1]);
@@ -93,18 +93,6 @@
 		}
 	}
 
-	/*
-	*  Set basic style
-	*/
-	function _setOpt (ctx, opt) {
-		console.log(opt);
-		ctx.fillStyle = _fillStyle(ctx, opt);
-		ctx.strokeStyle = opt.strokeColor;
-		ctx.lineWidth = opt.lineWidth;
-		ctx.shadowBlur = opt.shadow[0];
-		ctx.shadowColor = opt.shadow[1];
-	}
-
 	CanvasObj.prototype = {
 		/*
 		*  Draw line
@@ -112,8 +100,10 @@
 		drawLine: function (settings) {
 			var opt = _extendDefaults(this.defaults , settings);
 			
-			_setOpt(this.ctx, opt);
+			this.ctx.strokeStyle = opt.strokeColor;
+			this.ctx.lineWidth = opt.lineWidth;
 			this.ctx.lineCap = opt.lineCap;
+			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
 			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
 
 			for (var i = 1; i < opt.points.length; i++) {
@@ -127,6 +117,9 @@
 			if (opt.filled) {
 				this.ctx.fill();
 			}
+
+			this.ctx.shadowBlur = opt.shadow[0];
+			this.ctx.shadowColor = opt.shadow[1];
 
 			this.ctx.stroke();
 			this.ctx.closePath();
@@ -163,8 +156,10 @@
 		drawText: function (settings) {
 			var opt = _extendDefaults(this.defaults, settings);
 
-			_setOpt(this.ctx, opt);
+			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
 			this.ctx.font = opt.font;
+			this.ctx.shadowBlur = opt.shadow[0];
+			this.ctx.shadowColor = opt.shadow[1];
 			this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
 
 			if (opt.strokeText) {
@@ -182,11 +177,9 @@
 		drawRect: function (settings) {
 			var opt = _extendDefaults(this.defaults , settings);
 
-			_setOpt(this.ctx, opt);
+			this.ctx.fillStyle = _fillStyle(this.ctx, opt);
 			this.ctx.fillRect(10, 10, 300, 300);
-			this.ctx.rect(30,30,50,50);
 
-			this.ctx.stroke();
 			_renewDefaults(this.defaults, g_defaults);
 
 			return this;
@@ -242,7 +235,10 @@
 			return this;
 		},
 
-		clear: function () {
+		/*
+		*  Clean the whole or a part of canvas
+		*/
+		clean: function () {
 		    if (arguments[0]) {
 		    	this.ctx.clearRect(arguments[0], arguments[1], arguments[2], arguments[3]);
 		    } else {
