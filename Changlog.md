@@ -2,11 +2,12 @@
 
 - Depart gradient property of fill style and stroke style.
 - **_strokeStyle()**: Deal with strokeStyle for color/gridient/patten
+- **textAlign**: Text align property
 
 ## 2015.11.25
 
 - **_setOpt()**: 
-- Radial gradient property.
+- **RradialGradient**: Radial gradient property.
 
 ## 2015.11.24
 

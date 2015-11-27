@@ -18,18 +18,22 @@ Welcome to join us~
 |---|---|---|---|
 | closed | Bool  | false  | Creates a path from the last point back to the starting point<br>(闭合图形)   |
 | fillColor  |  Hex or RGB   |  "transparent" |  Fill Color<br>(填充颜色)  |
+| fontColor  | Hex or RGB  | "#000" |  Font color   |
+| fillLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for fill style<br>x0、y0 和 x1、y1:  填充线性渐变的起始点、结束点 |
+| fillRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,  y1: The starting and end circle of the gradient<br>r0 and r1： The radius of the starting and ending circle for fill style<br>x0, y0 和 x1, y1:  填充圆形渐变的起始、结束点<br>r0 和 r1: 开始和结束的圆的半径|
 | lineCap |  "butt"(平直),<br> "round"(圆形),<br> "square"(正方形) | "butt"  | The style of the end caps for a line<br>(线条结束端点的样式)  |
 | lineJoin |  "bevel"(斜角),<br>"round"(圆角),<br>"miter"(尖角) | "miter"  | The type of corner created, when two lines meet<br>(两条线相交时，所创建的拐角类型)  |
 | lineWidth  | Number  | 1 | Line width<br>(线条宽度)  |
 | points  |  Arrays  | [[0, 0], [0, 0]]  | Coordinate, [[x1, y1], [x2, y2], [x3, y3]...] <br>([x1, y1]是起始坐标)  |
 | shadow  |  [Number, "#FFF"] | [0, "#FFF"]  | Shadow  |
 | strokeColor | Hex or RGB  |  "#000" |  Outer line color for shape and text<br>(图形或文本描边的颜色)   |
-| strokeText  |  Bool |  false  |  Whether stroke the text<br>(是否开启给文本描边)  |
-| text | Sting  | "Test"  |   Text  |
 | fontColor  | Hex or RGB  | "#000" |  Font color   |
-| fillLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient<br>x0、y0 和 x1、y1:	填充线性渐变的起始点、结束点 |
-| fillRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,	y1:	The starting and end circle of the gradient<br>r0 and r1： The radius of the starting and ending circle<br>x0, y0 和 x1, y1:	填充圆形渐变的起始、结束点<br>r0 和 r1: 开始和结束的圆的半径|
-| stop | Arrays | [[0, "black"], [1, "white"]] | [[n1, "color"], [n2, "color"]...[nx, "color"]]<br>n: Between 0.0 and 1.0 that represents the position between start and end in a gradient<br>n: 在0和1之间，渐变停留的位置 |
+| strokeLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for stroke style<br>x0、y0 和 x1、y1:  描边线性渐变的起始点、结束点 |
+| strokeRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,  y1: The starting and end circle of the gradient for stroke style<br>r0 and r1： The radius of the starting and ending circle<br>(x0, y0 和 x1, y1:  描边圆形渐变的起始、结束点)<br>(r0 和 r1: 开始和结束的圆的半径)|
+| text | Sting  | "Test"  |   Text  |
+| textBaseline |  |  |  |
+|  |  |  |  |
+| stop | Arrays | [[0, "black"], [1, "white"]] | [[n1, "color"], [n2, "color"]...[nx, "color"]]<br>n: Between 0.0 and 1.0 that represents the position between start and end in a gradient<br>(n: 在0和1之间，渐变停留的位置) |
 |  |  |  |  |
 
 ## Variable

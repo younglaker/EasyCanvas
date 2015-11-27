@@ -21,7 +21,6 @@
 			font: "14px Arial Black",
 			points: [[0, 0], [0, 0]],
 			shadow:[0, "#FFF"],
-			strokeText: false,
 			strokeColor: "#000",
 			strokeLinerGradient: false,
 			strokeRradialGradient: false,
@@ -210,10 +209,7 @@
 			this.ctx.textBaseline = opt.textBaseline;
 			this.ctx.textAlign = opt.textAlign;
 			this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
-
-			if (opt.strokeText) {
-				this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
-			}
+			this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
 
 			this._renewDefaults();
 

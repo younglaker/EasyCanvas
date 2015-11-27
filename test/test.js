@@ -23,16 +23,15 @@ $(document).ready(function() {
         closed: true
     });*/
 
-/*    b.drawText({
+    b.drawText({
         points: [[00, 100]],
-        lineWidth: 2,
-        shadow: [7, "#0f0"],
-        strokeLinerGradient: [0, 0, 170, 0],
-        stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
+        lineWidth: 1,
+        // shadow: [7, "#0f0"],
+        // strokeLinerGradient: [0, 0, 170, 0],
+        // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         font: "50px Arial Black",
-        text: "Hello",
-        strokeText: true
-    });*/
+        text: "Hello"
+    });
 
 /*    b.drawText({
         points: [[00, 100]],
@@ -55,7 +54,7 @@ $(document).ready(function() {
     })
     .clean(20, 20, 100, 100);*/
 
-    b.drawLine({
+/*    b.drawLine({
         points: [[150, 20], [150, 170]]
     })
     .drawText({
@@ -82,6 +81,40 @@ $(document).ready(function() {
         points: [[150, 140]],
         text: "test test",
         textAlign: "right",
-    });
+    });*/
+
+/*    b.drawLine({
+        points: [[0, 100], [500, 100]]
+    })
+    .drawText({
+        points: [[0, 100]],
+        text: "alphabetic",
+        textBaseline: "alphabetic",
+    })
+    .drawText({
+        points: [[90, 100]],
+        text: "top",
+        textBaseline: "top",
+    })
+    .drawText({
+        points: [[130, 100]],
+        text: "hanging",
+        textBaseline: "hanging",
+    })
+    .drawText({
+        points: [[200, 100]],
+        text: "middle",
+        textBaseline: "middle",
+    })
+    .drawText({
+        points: [[270, 100]],
+        text: "ideographic",
+        textBaseline: "ideographic",
+    })
+    .drawText({
+        points: [[380, 100]],
+        text: "bottom",
+        textBaseline: "bottom",
+    });*/
 
 });
