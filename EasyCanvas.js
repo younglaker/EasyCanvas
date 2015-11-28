@@ -15,6 +15,8 @@
 			fontColor: "#000",
 			fontStroke: false,
 			lineCap: "butt",
+			lineJoin: "miter",
+			lineMiterLimit: 100,
 			lineWidth: 1,
 			fillLinerGradient: false,
 			fillRradialGradient: false,
@@ -44,6 +46,8 @@
 		fontColor: "#000",
 		fontStroke: false,
 		lineCap: "butt",
+		lineJoin: "miter",
+		lineMiterLimit: 100,
 		lineWidth: 1,
 		fillLinerGradient: false,
 		fillRradialGradient: false,
@@ -139,6 +143,8 @@
 		ctx.strokeStyle = _strokeStyle(ctx, opt);
 		ctx.lineWidth = opt.lineWidth;
 		ctx.lineCap = opt.lineCap;
+		ctx.lineJoin = opt.lineJoin;
+		ctx.miterLimit = opt.lineMiterLimit;
 		ctx.shadowBlur = opt.shadow[0];
 		ctx.shadowColor = opt.shadow[1];
 	}
@@ -161,10 +167,7 @@
 				this.ctx.lineTo(opt.points[0][0], opt.points[0][1]);
 			}
 
-			if (opt.filled) {
-				this.ctx.fill();
-			}
-
+			this.ctx.fill();
 			this.ctx.stroke();
 			this.ctx.closePath();
 
@@ -185,11 +188,10 @@
 
 			this.ctx.shadowBlur = opt.shadow[0][0];
 			this.ctx.shadowColor = opt.shadow[0][1];
-			if (opt.filled) {
-				this.ctx.fill();
-			}
 
+			this.ctx.fill();
 			this.ctx.stroke();
+			this.ctx.closePath();
 
 			this._renewDefaults();
 
@@ -202,6 +204,7 @@
 		drawText: function (settings) {
 			this.defaults.fillColor = "#000";
 			this.defaults.strokeColor = "transparent";
+
 			var opt = _extendDefaults(this.defaults, settings);
 
 			_setOpt(this.ctx, opt);
@@ -224,7 +227,11 @@
 
 			_setOpt(this.ctx, opt);
 
-			this.ctx.fillRect(10, 10, 300, 300);
+			this.ctx.rect(10, 10, 300, 300);
+
+			this.ctx.fill();
+			this.ctx.stroke();
+			this.ctx.closePath();
 
 			this._renewDefaults();
 

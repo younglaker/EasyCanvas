@@ -11,19 +11,19 @@ $(document).ready(function() {
     });*/
 // console.log("====");
     var b = new EasyCanvas("canvas2");
-/*    b.drawLine({
+    b.drawLine({
         points: [[10, 100], [200, 100], [10, 200]],
         lineCap: "round",
+        lineJoin: "round",
         lineWidth: 10,
-        filled: true,
         fillColor: "rgb(255, 165, 0)",
         strokeColor: "#00f",
         // strokeLinerGradient: [0, 0, 170, 0],
         // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         closed: true
-    });*/
+    });
 
-    b.drawText({
+/*    b.drawText({
         points: [[00, 100]],
         lineWidth: 1,
         // shadow: [7, "#0f0"],
@@ -31,7 +31,7 @@ $(document).ready(function() {
         // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         font: "50px Arial Black",
         text: "Hello"
-    });
+    });*/
 
 /*    b.drawText({
         points: [[00, 100]],
@@ -44,10 +44,9 @@ $(document).ready(function() {
         strokeText: true
     });*/
 
-/*    b.drawRect({
-        points: [[20,20],[150,100]],
-        linerGridient: [0, 0, 170, 0]
-    });*/
+    b.drawRect({
+        points: [[20, 20]],
+    });
 
 /*    b.drawRect({
         fillColor: "#000"
