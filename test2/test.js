@@ -11,7 +11,7 @@ $(document).ready(function() {
 	var a = new EasyCanvas("canvas");
 	a.drawQuadratic({
 		shadow: [7, "#0f0"],
-		color: "#0000ff",
+		strokeColor: "#0000ff",
 		points: [
 			[20, 20],
 			[20,100,200,10]

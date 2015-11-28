@@ -226,7 +226,6 @@
 			
 			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
 			this.ctx.quadraticCurveTo(opt.points[1][0], opt.points[1][1], opt.points[1][2], opt.points[1][3], opt.points[1][4]);
-			this.ctx.strokeStyle = opt.color;
 			this.ctx.stroke();
 			this._renewDefaults();
 			
