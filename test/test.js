@@ -35,7 +35,7 @@ $(document).ready(function() {
     });
 */
     b.drawText({
-        points: [[00, 100]],
+        points: [00, 100],
         shadow: [7, "#0f0"],
         fillRradialGradient: [75, 50, 5, 90, 60, 100],
         stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
@@ -46,7 +46,15 @@ $(document).ready(function() {
     });
 
     b.drawRect({
-        points: [[20, 20]],
+        points: [10, 50],
+        rectWidth: 300,
+        rectHeight: 200,
+        fillRradialGradient: [75, 50, 5, 90, 60, 100]
+    });
+
+    b.drawSquare({
+        points: [20, 60],
+        rectWidth: 300  
     });
 
 /*    b.drawRect({

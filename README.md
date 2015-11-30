@@ -24,37 +24,17 @@ Welcome to join us~
 | lineCap |  "butt"(平直),<br> "round"(圆形),<br> "square"(正方形) | "butt"  | The style of the end caps for a line<br>(线条结束端点的样式)  |
 | lineJoin |  "bevel"(斜角),<br>"round"(圆角),<br>"miter"(尖角) | "miter"  | The type of corner created, when two lines meet<br>(两条线相交时，所创建的拐角类型)  |
 | lineWidth  | Number  | 1 | Line width<br>(线条宽度)  |
-| points  |  Arrays  | [[0, 0], [0, 0]]  | Coordinate, [[x1, y1], [x2, y2], [x3, y3]...] <br>([x1, y1]是起始坐标)  |
+| points  |  Arrays  | [[0, 0], [0, 0]]  | Coordinate, [x1, y1] or [[x1, y1], [x2, y2], [x3, y3]...]. The format depands on particular drawing function.<br>([x1, y1]是起始坐标)  |
+| rectWidth | Number |  | Width of rectangle and Foursquare |
+| rectHeight | Number |  | Height of rectangle and Foursquare |
 | shadow  |  [Number, "#FFF"] | [0, "#FFF"]  | Shadow  |
 | strokeColor | Hex or RGB  |  "#000" |  Outer line color for shape and text<br>(图形或文本描边的颜色)   |
 | fontColor  | Hex or RGB  | "#000" |  Font color   |
 | strokeLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for stroke style<br>x0、y0 和 x1、y1:  描边线性渐变的起始点、结束点 |
 | strokeRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,  y1: The starting and end circle of the gradient for stroke style<br>r0 and r1： The radius of the starting and ending circle<br>(x0, y0 和 x1, y1:  描边圆形渐变的起始、结束点)<br>(r0 和 r1: 开始和结束的圆的半径)|
 | text | Sting  | "Test"  |   Text  |
-<<<<<<< HEAD
 | textBaseline | "alphabetic"(普通的字母基线)<br>"top"(em 方框的顶端)<br>"hanging"(悬挂基线)<br>"middle"(em 方框的正中)<br>"ideographic"(表意基线)<br>"bottom"(em 方框的底端) | "alphabetic" | Text baseline.<br>(文本基线)|
 | textAlign | "start"(在指定的位置开始)<br>"end"(在指定的位置结束)<br>"center"(文本的中心被放置在指定的位置)<br>"left"(文本左对齐)<br>"right"(文本右对齐) | "start" | Text align.<br>(文本对齐方式) |
-| stop | Arrays | [[0, "black"], [1, "white"]] | [[n1, "color"], [n2, "color"]...[nx, "color"]]<br>n: Between 0.0 and 1.0 that represents the position between start and end in a gradient<br>(n: 在0和1之间，渐变停留的位置) |
-|  |  |  |  |
-
-
-
-
-## Variable
-
-| Property | Description | Example |
-|---|---|---|
-| width | The width of canvas | var w = A.width; |
-| height | The height of canvas | var h = A.height; |
-
-## Drawing
-### Line: drawLine()
-
-**Example:**
-
-=======
-| textBaseline |  |  |  |
-|  |  |  |  |
 | stop | Arrays | [[0, "black"], [1, "white"]] | [[n1, "color"], [n2, "color"]...[nx, "color"]]<br>n: Between 0.0 and 1.0 that represents the position between start and end in a gradient<br>(n: 在0和1之间，渐变停留的位置) |
 |  |  |  |  |
 
@@ -79,6 +59,8 @@ Welcome to join us~
     	points: [[10, 100], [200, 100], [10, 200]]
     });
 
+### Arc: drawArc()
+
 ### Quadratic: drawQuadratic()
 
 **Example:**
@@ -89,16 +71,23 @@ Welcome to join us~
 		points: [[20, 20],[20,100,200,10]]
 	});
 
-### Arc: drawArc()
-
 ### Rectangle: drawRect()
+
+### Foursquare: drawSquare()
+
+**Example:**
+
+    A.drawSquare({
+        points: [20, 60],
+        rectWidth: 300  
+    });
 
 ### Text: drawText()
 
 **Example:**
 
     A.drawText({
-        points: [[00, 100]],
+        points: [10, 100],
         lineWidth: 10,
         shadow: [7, "#0f0"],
         linerGridient: [0, 0, 170, 0],

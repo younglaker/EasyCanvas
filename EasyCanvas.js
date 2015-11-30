@@ -197,46 +197,6 @@
 		},
 
 		/*
-		*  Draw text
-		*/
-		drawText: function (settings) {
-			this.defaults.fillColor = "#000";
-			this.defaults.strokeColor = "transparent";
-
-			var opt = _extendDefaults(this.defaults, settings);
-			_setOpt(this.ctx, opt);
-			this.ctx.font = opt.font;
-			this.ctx.textBaseline = opt.textBaseline;
-			this.ctx.textAlign = opt.textAlign;
-			this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
-			this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
-
-			this.ctx.closePath();
-			this._renewDefaults();
-
-			return this;
-		},
-
-		/*
-		*  Draw rectangle
-		*/
-		drawRect: function (settings) {
-			var opt = _extendDefaults(this.defaults , settings);
-
-			_setOpt(this.ctx, opt);
-
-			this.ctx.rect(50, 50, 300, 300);
-
-			this.ctx.fill();
-			this.ctx.stroke();
-			this.ctx.closePath();
-
-			this._renewDefaults();
-
-			return this;
-		},
-
-		/*
 		 *  Draw Quadratic
 		 */
 		drawQuadratic: function(settings) {
@@ -253,6 +213,67 @@
 
 			this._renewDefaults();
 			
+			return this;
+		},
+
+		/*
+		*  Draw rectangle
+		*/
+		drawRect: function (settings) {
+			var opt = _extendDefaults(this.defaults , settings);
+
+			_setOpt(this.ctx, opt);
+
+			this.ctx.rect(opt.points[0], opt.points[1], opt.rectWidth, opt.rectHeight);
+
+			this.ctx.fill();
+			this.ctx.stroke();
+			this.ctx.closePath();
+
+			this._renewDefaults();
+
+			return this;
+		},
+
+		/*
+		*  Draw rectangle
+		*/
+		drawSquare: function (settings) {
+			var opt = _extendDefaults(this.defaults , settings);
+
+			_setOpt(this.ctx, opt);
+
+			this.drawRect({
+				points: [opt.points[0], opt.points[1]],
+				rectWidth: opt.rectWidth,
+				rectHeight: opt.rectWidth,
+			});
+
+			this._renewDefaults();
+
+			return this;
+		},
+		
+		/*
+		*  Draw text
+		*/
+		drawText: function (settings) {
+			this.defaults.fillColor = "#000";
+			this.defaults.strokeColor = "transparent";
+
+			var opt = _extendDefaults(this.defaults, settings);
+
+			_setOpt(this.ctx, opt);
+
+			this.ctx.font = opt.font;
+			this.ctx.textBaseline = opt.textBaseline;
+			this.ctx.textAlign = opt.textAlign;
+			this.ctx.fillText(opt.text, opt.points[0], opt.points[1]);
+			this.ctx.strokeText(opt.text, opt.points[0], opt.points[1]);
+
+			this.ctx.closePath();
+			this._renewDefaults();
+
 			return this;
 		},
 
@@ -315,6 +336,8 @@
 		    } else {
 		    	this.ctx.clearRect(0, 0, this.width, this.height);
 		    }
+
+			return this;
 		}
 	};
 
