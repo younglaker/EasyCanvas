@@ -8,13 +8,18 @@ $(document).ready(function() {
 	//     shadow:[[7,"black"]],
 	//     fillColor: "rgb(255,165,0)"
 	//   });
+	//	a.drawText({
+	//      points: [[150, 120]],
+	//      text: "test test",
+	//      textAlign: "left",
+	//  })
 	var a = new EasyCanvas("canvas");
 	a.drawQuadratic({
 		shadow: [7, "#0f0"],
 		strokeColor: "#0000ff",
 		points: [
 			[20, 20],
-			[20,100,200,10]
+			[20, 100, 200, 10]
 		]
 	});
 });
