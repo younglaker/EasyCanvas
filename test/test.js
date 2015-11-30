@@ -11,6 +11,7 @@ $(document).ready(function() {
     });*/
 // console.log("====");
     var b = new EasyCanvas("canvas2");
+
     b.drawLine({
         points: [[10, 100], [200, 100], [10, 200]],
         lineCap: "round",
@@ -31,9 +32,9 @@ $(document).ready(function() {
         // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         font: "50px Arial Black",
         text: "Hello"
-    });*/
-
-/*    b.drawText({
+    });
+*/
+    b.drawText({
         points: [[00, 100]],
         shadow: [7, "#0f0"],
         fillRradialGradient: [75, 50, 5, 90, 60, 100],
@@ -42,7 +43,7 @@ $(document).ready(function() {
         font: "50px Arial Black",
         text: "Hello",
         strokeText: true
-    });*/
+    });
 
     b.drawRect({
         points: [[20, 20]],

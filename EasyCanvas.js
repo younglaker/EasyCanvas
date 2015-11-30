@@ -36,7 +36,7 @@
 		*  Renew defaults with original defaults
 		*/
 		this._renewDefaults = function () {
-			this.defaults = g_defaults;
+			this.defaults = JSON.parse(JSON.stringify(g_defaults));
 		}
 	};
 
@@ -54,7 +54,6 @@
 		font: "14px Arial Black",
 		points: [[0, 0], [0, 0]],
 		shadow:[0, "#FFF"],
-		strokeText: false,
 		strokeColor: "#000",
 		strokeLinerGradient: false,
 		strokeRradialGradient: false,
@@ -172,7 +171,6 @@
 			this.ctx.closePath();
 
 			this._renewDefaults();
-			this.defaults = g_defaults;
 
 			return this;
 		},
@@ -206,7 +204,6 @@
 			this.defaults.strokeColor = "transparent";
 
 			var opt = _extendDefaults(this.defaults, settings);
-
 			_setOpt(this.ctx, opt);
 			this.ctx.font = opt.font;
 			this.ctx.textBaseline = opt.textBaseline;
@@ -214,6 +211,7 @@
 			this.ctx.fillText(opt.text, opt.points[0][0], opt.points[0][1]);
 			this.ctx.strokeText(opt.text, opt.points[0][0], opt.points[0][1]);
 
+			this.ctx.closePath();
 			this._renewDefaults();
 
 			return this;
@@ -227,7 +225,7 @@
 
 			_setOpt(this.ctx, opt);
 
-			this.ctx.rect(10, 10, 300, 300);
+			this.ctx.rect(50, 50, 300, 300);
 
 			this.ctx.fill();
 			this.ctx.stroke();
@@ -235,6 +233,26 @@
 
 			this._renewDefaults();
 
+			return this;
+		},
+
+		/*
+		 *  Draw Quadratic
+		 */
+		drawQuadratic: function(settings) {
+			var opt = _extendDefaults(this.defaults, settings);
+
+			_setOpt(this.ctx, opt);
+			
+			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
+			this.ctx.quadraticCurveTo(opt.points[1][0], opt.points[1][1], opt.points[1][2], opt.points[1][3], opt.points[1][4]);
+
+			this.ctx.fill();
+			this.ctx.stroke();
+			this.ctx.closePath();
+
+			this._renewDefaults();
+			
 			return this;
 		},
 
