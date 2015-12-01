@@ -16,18 +16,21 @@ Welcome to join us~
 
 | Property | Value  | Default  |   Description  |
 |---|---|---|---|
+| ccw | "false": clockwise<br>"true": counter-clockwise. | "false" | Counterclockwise<br>(规定应该逆时针还是顺时针绘图) |
 | closed | Bool  | false  | Creates a path from the last point back to the starting point<br>(闭合图形)   |
+| endAngle | Radians | 2 * Math.PI | The ending  angle in radians(结束角，以弧度计) |
 | fillColor  |  Hex or RGB   |  "transparent" |  Fill Color<br>(填充颜色)  |
 | fontColor  | Hex or RGB  | "#000" |  Font color   |
 | fillLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for fill style<br>x0、y0 和 x1、y1:  填充线性渐变的起始点、结束点 |
-| fillRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,  y1: The starting and end circle of the gradient<br>r0 and r1： The radius of the starting and ending circle for fill style<br>x0, y0 和 x1, y1:  填充圆形渐变的起始、结束点<br>r0 和 r1: 开始和结束的圆的半径|
+| fillRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,  y1: The starting and end circle of the gradient<br>r0 and r1： The radius of the starting and ending circle for fill style<br>x0, y0 和 x1, y1:  填充圆形渐变的起始、结束点<br>r0 和 r1: 开始和结束的圆的半径 |
 | lineCap |  "butt"(平直),<br> "round"(圆形),<br> "square"(正方形) | "butt"  | The style of the end caps for a line<br>(线条结束端点的样式)  |
 | lineJoin |  "bevel"(斜角),<br>"round"(圆角),<br>"miter"(尖角) | "miter"  | The type of corner created, when two lines meet<br>(两条线相交时，所创建的拐角类型)  |
 | lineWidth  | Number  | 1 | Line width<br>(线条宽度)  |
-| points  |  Arrays  | [[0, 0], [0, 0]]  | Coordinate, [x1, y1] or [[x1, y1], [x2, y2], [x3, y3]...]. The format depands on particular drawing function.<br>([x1, y1]是起始坐标)  |
+| points  |  Arrays  | [[0, 0], [0, 0]]  | Coordinate, [x1, y1] or [[x1, y1], [x2, y2], [x3, y3]...]. The format depands on particular drawing function.<br>([x1, y1]是起始坐标，坐标具体用法详见每个方法)  |
 | rectWidth | Number |  | Width of rectangle and Foursquare |
 | rectHeight | Number |  | Height of rectangle and Foursquare |
 | shadow  |  [Number, "#FFF"] | [0, "#FFF"]  | Shadow  |
+| startAngle | Radians | 0 | The starting angle in radians(起始角，以弧度计。) |
 | strokeColor | Hex or RGB  |  "#000" |  Outer line color for shape and text<br>(图形或文本描边的颜色)   |
 | fontColor  | Hex or RGB  | "#000" |  Font color   |
 | strokeLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for stroke style<br>x0、y0 和 x1、y1:  描边线性渐变的起始点、结束点 |
@@ -60,6 +63,18 @@ Welcome to join us~
     });
 
 ### Arc: drawArc()
+
+**Example:**
+
+    b.drawArc({
+        shadow: [7, "#0f0"],
+        strokeColor: "#0000ff",
+        points: [50, 50],
+        radius: 50,
+        startAngle: 50, 
+        endAngle: Math.PI,
+        ccw: false
+    });
 
 ### Quadratic: drawQuadratic()
 

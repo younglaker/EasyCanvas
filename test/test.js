@@ -34,7 +34,7 @@ $(document).ready(function() {
         text: "Hello"
     });
 */
-    b.drawText({
+/*    b.drawText({
         points: [00, 100],
         shadow: [7, "#0f0"],
         fillRradialGradient: [75, 50, 5, 90, 60, 100],
@@ -43,9 +43,9 @@ $(document).ready(function() {
         font: "50px Arial Black",
         text: "Hello",
         strokeText: true
-    });
+    });*/
 
-    b.drawRect({
+/*    b.drawRect({
         points: [10, 50],
         rectWidth: 300,
         rectHeight: 200,
@@ -55,7 +55,7 @@ $(document).ready(function() {
     b.drawSquare({
         points: [20, 60],
         rectWidth: 300  
-    });
+    });*/
 
 /*    b.drawRect({
         fillColor: "#000"
@@ -124,5 +124,21 @@ $(document).ready(function() {
         text: "bottom",
         textBaseline: "bottom",
     });*/
+
+    b.drawArc({
+        shadow: [7, "#0f0"],
+        strokeColor: "#0000ff",
+        points: [50, 50],
+        radius: 50,
+        startAngle: 50, 
+        endAngle: Math.PI,
+        ccw: false
+    });
+
+    b.drawQuadratic({
+        shadow: [7, "#0f0"],
+        color: "#0000ff",
+        points: [[20, 20], [20, 100], [200, 10]]
+    });
 
 });

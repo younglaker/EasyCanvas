@@ -10,7 +10,9 @@
 		this.width = this.canvas.width;
 		this.height = this.canvas.height;
 		this.defaults = {
+			ccw: false,
 			closed: false,
+			endAngle: 2 * Math.PI,
 			fillColor: "transparent",
 			fontColor: "#000",
 			fontStroke: false,
@@ -22,7 +24,8 @@
 			fillRradialGradient: false,
 			font: "14px Arial Black",
 			points: [[0, 0], [0, 0]],
-			shadow:[0, "#FFF"],
+			shadow:[0, "#fff"],
+			startAngle: 0,
 			strokeColor: "#000",
 			strokeLinerGradient: false,
 			strokeRradialGradient: false,
@@ -41,7 +44,9 @@
 	};
 
 	var g_defaults = {
+		ccw: false,
 		closed: false,
+		endAngle: 2 * Math.PI,
 		fillColor: "transparent",
 		fontColor: "#000",
 		fontStroke: false,
@@ -53,7 +58,8 @@
 		fillRradialGradient: false,
 		font: "14px Arial Black",
 		points: [[0, 0], [0, 0]],
-		shadow:[0, "#FFF"],
+		shadow:[0, "#fff"],
+		startAngle: 0,
 		strokeColor: "#000",
 		strokeLinerGradient: false,
 		strokeRradialGradient: false,
@@ -146,6 +152,7 @@
 		ctx.miterLimit = opt.lineMiterLimit;
 		ctx.shadowBlur = opt.shadow[0];
 		ctx.shadowColor = opt.shadow[1];
+		ctx.beginPath();
 	}
 
 	CanvasObj.prototype = {
@@ -182,10 +189,8 @@
 			var opt = _extendDefaults(this.defaults, settings);
 			
 			_setOpt(this.ctx, opt);
-			this.ctx.arc(opt.points[0][0], opt.points[0][1], opt.points[0][2],opt.points[1][0], opt.points[1][1] * Math.PI);
 
-			this.ctx.shadowBlur = opt.shadow[0][0];
-			this.ctx.shadowColor = opt.shadow[0][1];
+			this.ctx.arc(opt.points[0], opt.points[1], opt.radius, opt.startAngle, opt.endAngle, opt.ccw);
 
 			this.ctx.fill();
 			this.ctx.stroke();
@@ -205,7 +210,7 @@
 			_setOpt(this.ctx, opt);
 			
 			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
-			this.ctx.quadraticCurveTo(opt.points[1][0], opt.points[1][1], opt.points[1][2], opt.points[1][3], opt.points[1][4]);
+			this.ctx.quadraticCurveTo(opt.points[1][0], opt.points[1][1], opt.points[2][0], opt.points[2][1]);
 
 			this.ctx.fill();
 			this.ctx.stroke();
@@ -272,6 +277,7 @@
 			this.ctx.strokeText(opt.text, opt.points[0], opt.points[1]);
 
 			this.ctx.closePath();
+
 			this._renewDefaults();
 
 			return this;
