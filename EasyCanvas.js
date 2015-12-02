@@ -24,7 +24,11 @@
 			fillRradialGradient: false,
 			font: "14px Arial Black",
 			points: [[0, 0], [0, 0]],
-			shadow:[0, "#fff"],
+			shadow: [1, 1, 1, "#fff"],
+			shadowX: false,
+			shadowY: false,
+			shadowBlur: false,
+			shadowColor: false,
 			startAngle: 0,
 			strokeColor: "#000",
 			strokeLinerGradient: false,
@@ -58,7 +62,11 @@
 		fillRradialGradient: false,
 		font: "14px Arial Black",
 		points: [[0, 0], [0, 0]],
-		shadow:[0, "#fff"],
+		shadow: [1, 1, 1, "#fff"],
+		shadowX: false,
+		shadowY: false,
+		shadowBlur: false,
+		shadowColor: false,
 		startAngle: 0,
 		strokeColor: "#000",
 		strokeLinerGradient: false,
@@ -144,14 +152,21 @@
 	*  Set basic style
 	*/
 	function _setOpt (ctx, opt) {
+		if (opt.shadowX) opt.shadow[0] = opt.shadowX;
+		if (opt.shadowY) opt.shadow[1] = opt.shadowY;
+		if (opt.shadowBlur) opt.shadow[2] = opt.shadowBlur;
+		if (opt.shadowColor) opt.shadow[3] = opt.shadowColor;
+
 		ctx.fillStyle = _fillStyle(ctx, opt);
 		ctx.strokeStyle = _strokeStyle(ctx, opt);
 		ctx.lineWidth = opt.lineWidth;
 		ctx.lineCap = opt.lineCap;
 		ctx.lineJoin = opt.lineJoin;
 		ctx.miterLimit = opt.lineMiterLimit;
-		ctx.shadowBlur = opt.shadow[0];
-		ctx.shadowColor = opt.shadow[1];
+		ctx.shadowOffsetX = opt.shadow[0];
+		ctx.shadowOffsetY = opt.shadow[1];
+		ctx.shadowBlur = opt.shadow[2];
+		ctx.shadowColor = opt.shadow[3];
 		ctx.beginPath();
 	}
 
@@ -202,15 +217,37 @@
 		},
 
 		/*
-		 *  Draw Quadratic
+		 *  Draw quadratic curve
 		 */
 		drawQuadratic: function(settings) {
 			var opt = _extendDefaults(this.defaults, settings);
+			var points = opt.points;
 
 			_setOpt(this.ctx, opt);
 			
-			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
-			this.ctx.quadraticCurveTo(opt.points[1][0], opt.points[1][1], opt.points[2][0], opt.points[2][1]);
+			this.ctx.moveTo(points[0][0], points[0][1]);
+			this.ctx.quadraticCurveTo(points[1][0], points[1][1], points[2][0], points[2][1]);
+
+			this.ctx.fill();
+			this.ctx.stroke();
+			this.ctx.closePath();
+
+			this._renewDefaults();
+			
+			return this;
+		},
+
+		/*
+		 *  Draw bezier curve
+		 */
+		drawBezier: function(settings) {
+			var opt = _extendDefaults(this.defaults, settings);
+			var points = opt.points;
+
+			_setOpt(this.ctx, opt);
+			
+			this.ctx.moveTo(points[0][0], points[0][1]);
+			this.ctx.bezierCurveTo(points[1][0], points[1][1], points[2][0], points[2][1], points[3][0], points[3][1]);
 
 			this.ctx.fill();
 			this.ctx.stroke();

@@ -19,8 +19,8 @@ Welcome to join us~
 | ccw | "false": clockwise<br>"true": counter-clockwise. | "false" | Counterclockwise<br>(规定应该逆时针还是顺时针绘图) |
 | closed | Bool  | false  | Creates a path from the last point back to the starting point<br>(闭合图形)   |
 | endAngle | Radians | 2 * Math.PI | The ending  angle in radians(结束角，以弧度计) |
-| fillColor  |  Hex or RGB   |  "transparent" |  Fill Color<br>(填充颜色)  |
-| fontColor  | Hex or RGB  | "#000" |  Font color   |
+| fillColor  |  Color   |  "transparent" |  Fill Color<br>(填充颜色)  |
+| fontColor  | Color  | "#000" |  Font color   |
 | fillLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for fill style<br>x0、y0 和 x1、y1:  填充线性渐变的起始点、结束点 |
 | fillRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,  y1: The starting and end circle of the gradient<br>r0 and r1： The radius of the starting and ending circle for fill style<br>x0, y0 和 x1, y1:  填充圆形渐变的起始、结束点<br>r0 和 r1: 开始和结束的圆的半径 |
 | lineCap |  "butt"(平直),<br> "round"(圆形),<br> "square"(正方形) | "butt"  | The style of the end caps for a line<br>(线条结束端点的样式)  |
@@ -29,10 +29,14 @@ Welcome to join us~
 | points  |  Arrays  | [[0, 0], [0, 0]]  | Coordinate, [x1, y1] or [[x1, y1], [x2, y2], [x3, y3]...]. The format depands on particular drawing function.<br>([x1, y1]是起始坐标，坐标具体用法详见每个方法)  |
 | rectWidth | Number |  | Width of rectangle and Foursquare |
 | rectHeight | Number |  | Height of rectangle and Foursquare |
-| shadow  |  [Number, "#FFF"] | [0, "#FFF"]  | Shadow  |
+| shadow  |  [Number, Number, Number, Color] | [1, 1, 1, "#fff"] | Shadow, [shadowX, shadowY, shadowBlur, shadowColor] |
+| shadowX |  Number |  | Vertical shadow |
+| shadowY |  Number |  | Horizontal shadow |
+| shadowBlur |  Number |  | Shadow blur |
+| shadowColor |  Color |  | Shadow color |
 | startAngle | Radians | 0 | The starting angle in radians(起始角，以弧度计。) |
-| strokeColor | Hex or RGB  |  "#000" |  Outer line color for shape and text<br>(图形或文本描边的颜色)   |
-| fontColor  | Hex or RGB  | "#000" |  Font color   |
+| strokeColor | Color  |  "#000" |  Outer line color for shape and text<br>(图形或文本描边的颜色)   |
+| fontColor  | Color  | "#000" |  Font color   |
 | strokeLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for stroke style<br>x0、y0 和 x1、y1:  描边线性渐变的起始点、结束点 |
 | strokeRradialGradient | Arrays |  | [x0, y0, r0, x1, y1, r1]<br>x0, y0 and x1,  y1: The starting and end circle of the gradient for stroke style<br>r0 and r1： The radius of the starting and ending circle<br>(x0, y0 和 x1, y1:  描边圆形渐变的起始、结束点)<br>(r0 和 r1: 开始和结束的圆的半径)|
 | text | Sting  | "Test"  |   Text  |
@@ -66,8 +70,8 @@ Welcome to join us~
 
 **Example:**
 
-    b.drawArc({
-        shadow: [7, "#0f0"],
+    A.drawArc({
+        shadow: [1, 1, 7, "#0f0"],
         strokeColor: "#0000ff",
         points: [50, 50],
         radius: 50,
@@ -76,17 +80,35 @@ Welcome to join us~
         ccw: false
     });
 
-### Quadratic: drawQuadratic()
+### Quadratic curve: drawQuadratic()
 
 **Example:**
 
     A.drawQuadratic({
-		shadow: [7, "#0f0"],
-		color: "#0000ff",
-		points: [[20, 20],[20,100,200,10]]
-	});
+        shadow: [1, 1, 7, "#0f0"],
+        color: "#0000ff",
+        points: [[20, 20],[20,100,200,10]]
+    });
+
+### Bezier curve: drawBezier()
+
+**Example:**
+
+    A.drawBezier({
+        color: "#0000ff",
+        points: [[20, 20], [20, 100], [200, 100], [200, 20]]
+    });
 
 ### Rectangle: drawRect()
+
+**Example:**
+
+    A.drawRect({
+        points: [10, 50],
+        rectWidth: 300,
+        rectHeight: 200,
+        fillRradialGradient: [75, 50, 5, 90, 60, 100]
+    });
 
 ### Foursquare: drawSquare()
 
@@ -104,7 +126,7 @@ Welcome to join us~
     A.drawText({
         points: [10, 100],
         lineWidth: 10,
-        shadow: [7, "#0f0"],
+        shadow: [1, 1, 7, "#0f0"],
         linerGridient: [0, 0, 170, 0],
         stop: [[0, "black"], [0.3,"magenta"],[0.5,"blue"],[0.6,"green"],[0.8,"yellow"],[1,"red"]],
         font: "30px Arial Black",
@@ -138,12 +160,12 @@ Draw the coordinate of canvas in order to use canvas easierly.
 
 **Example:**
 
-    b.drawRect({
+    A.drawRect({
         fillColor: "#000"
     })
     .clean();  // Clean the whole canvas
 
-    b.drawRect({
+    A.drawRect({
         fillColor: "#000"
     })
     .clean(20, 20, 100, 100);  // Clean the some parts
@@ -151,13 +173,15 @@ Draw the coordinate of canvas in order to use canvas easierly.
 # To-Do
 
 ## Functions
-- [x] Gradient stroke style
+
 - [ ] Pattern stroke and fill style
-- [ ] drawRect()
-- [ ] drawArc()
+- [x] Gradient stroke style
+- [x] drawRect()
+- [x] drawArc()
 
 ## Improvements
 
+- [ ] Continuously drawing
 - [x] Remove strokeText property
 
 ## Bugs

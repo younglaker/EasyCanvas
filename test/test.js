@@ -27,7 +27,7 @@ $(document).ready(function() {
 /*    b.drawText({
         points: [[00, 100]],
         lineWidth: 1,
-        // shadow: [7, "#0f0"],
+        // shadow: [1, 1, 7, "#0f0"],
         // strokeLinerGradient: [0, 0, 170, 0],
         // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         font: "50px Arial Black",
@@ -36,7 +36,7 @@ $(document).ready(function() {
 */
 /*    b.drawText({
         points: [00, 100],
-        shadow: [7, "#0f0"],
+        shadow: [1, 1, 7, "#0f0"],
         fillRradialGradient: [75, 50, 5, 90, 60, 100],
         stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         strokeColor: "#fff",
@@ -126,7 +126,7 @@ $(document).ready(function() {
     });*/
 
     b.drawArc({
-        shadow: [7, "#0f0"],
+        shadow: [0, 0, 7, "#0f0"],
         strokeColor: "#0000ff",
         points: [50, 50],
         radius: 50,
@@ -136,9 +136,15 @@ $(document).ready(function() {
     });
 
     b.drawQuadratic({
-        shadow: [7, "#0f0"],
+        shadow: [1, 1, 7, "#0f0"],
         color: "#0000ff",
+        shadowColor: "#000",
         points: [[20, 20], [20, 100], [200, 10]]
+    });
+
+    b.drawBezier({
+        color: "#0000ff",
+        points: [[20, 20], [20, 100], [200, 100], [200, 20]]
     });
 
 });

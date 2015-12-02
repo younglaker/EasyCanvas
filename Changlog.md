@@ -1,8 +1,22 @@
+## 2015.12.2
+- **drawBezier()**: Draw bezier curve.
+
+## 2015.12.1
+- **drawArc()**: Draw arc.
+- **drawQuadratic()**: Draw quadratic curve.
+
+## 2015.11.30
+- **drawSquare()**: Draw foursquare.
+
+## 2015.11.27
+
+- **textBaseline**: Text baseline property.
+
 ## 2015.11.26
 
 - Depart gradient property of fill style and stroke style.
-- **_strokeStyle()**: Deal with strokeStyle for color/gridient/patten
-- **textAlign**: Text align property
+- **_strokeStyle()**: Deal with strokeStyle for color/gridient/patten.
+- **textAlign**: Text align property.
 
 ## 2015.11.25
 
