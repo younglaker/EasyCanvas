@@ -12,7 +12,7 @@ $(document).ready(function() {
 // console.log("====");
     var b = new EasyCanvas("canvas2");
 
-    b.drawLine({
+/*    b.drawLine({
         points: [[10, 100], [200, 100], [10, 200]],
         lineCap: "round",
         lineJoin: "round",
@@ -22,7 +22,7 @@ $(document).ready(function() {
         // strokeLinerGradient: [0, 0, 170, 0],
         // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         closed: true
-    });
+    });*/
 
 /*    b.drawText({
         points: [[00, 100]],
@@ -125,7 +125,7 @@ $(document).ready(function() {
         textBaseline: "bottom",
     });*/
 
-    b.drawArc({
+/*    b.drawArc({
         shadow: [0, 0, 7, "#0f0"],
         strokeColor: "#0000ff",
         points: [50, 50],
@@ -133,18 +133,26 @@ $(document).ready(function() {
         startAngle: 50, 
         endAngle: Math.PI,
         ccw: false
-    });
+    });*/
 
     b.drawQuadratic({
         shadow: [1, 1, 7, "#0f0"],
         color: "#0000ff",
         shadowColor: "#000",
-        points: [[20, 20], [20, 100], [200, 10]]
+        basic: [
+                [60, 20, 20, 100, 200, 10],
+                [30, 100, 300, 60]
+               ],
+        basic1: [
+                [10, 10, 10, 100, 100, 10],
+                [40, 100, 400, 10],
+                [50, 120, 300, 10]
+               ]
     });
 
-    b.drawBezier({
+/*    b.drawBezier({
         color: "#0000ff",
         points: [[20, 20], [20, 100], [200, 100], [200, 20]]
-    });
+    });*/
 
 });

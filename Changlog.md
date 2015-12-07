@@ -1,3 +1,6 @@
+## 2015.12.7
+- __*Branch chapi*__: Rewrite the api of drawQuadratic().
+
 ## 2015.12.2
 - **drawBezier()**: Draw bezier curve.
 

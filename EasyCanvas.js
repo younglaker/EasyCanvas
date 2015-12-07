@@ -10,6 +10,7 @@
 		this.width = this.canvas.width;
 		this.height = this.canvas.height;
 		this.defaults = {
+			basic: false,
 			ccw: false,
 			closed: false,
 			endAngle: 2 * Math.PI,
@@ -48,6 +49,7 @@
 	};
 
 	var g_defaults = {
+		basic: false,
 		ccw: false,
 		closed: false,
 		endAngle: 2 * Math.PI,
@@ -221,13 +223,34 @@
 		 */
 		drawQuadratic: function(settings) {
 			var opt = _extendDefaults(this.defaults, settings);
-			var points = opt.points;
+			var bs = {};
 
 			_setOpt(this.ctx, opt);
-			
-			this.ctx.moveTo(points[0][0], points[0][1]);
-			this.ctx.quadraticCurveTo(points[1][0], points[1][1], points[2][0], points[2][1]);
 
+			// 遍历所有设置
+			for (var i in opt) {
+				// 把 basic 设置放入 bs
+				if (!!i.match(/basic/))
+					// 给 “baisc” 填充成 “baisc0”，方便后续遍历
+					bs[!!i.match(/basic\d+/) ? i : i + "0"] = opt[i];
+			}
+
+			for (var i = 0; i < Object.keys(bs).length; i++) {
+				var basic = bs["basic" + i];
+
+				for (var j = 0; j < basic.length; j++) {
+
+					if (j === 0) {	// basic0
+						this.ctx.moveTo(basic[j][0], basic[j][1]);
+						this.ctx.quadraticCurveTo(basic[j][2], basic[j][3], basic[j][4], basic[j][5]);
+
+					} else {	// 其他basic使用上一笔画的结束点作为此笔画的起始点
+						this.ctx.moveTo(basic[j - 1][4], basic[j - 1][5]);
+						this.ctx.quadraticCurveTo(basic[j][0], basic[j][1], basic[j][2], basic[j][3]);
+					}
+				}
+			}
+			
 			this.ctx.fill();
 			this.ctx.stroke();
 			this.ctx.closePath();
