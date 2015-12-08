@@ -1,5 +1,11 @@
+## 2015.12.8
+__*Branch points*__:
+- Rewrite the api of drawLine(), drawBezier().
+- *_draw()*: Deal the operation to fill and stroke (in Branch points).
+
 ## 2015.12.7
-- __*Branch chapi*__: Rewrite the api of drawQuadratic().
+__*Branch points*__: 
+- Rewrite the api of drawQuadratic().
 
 ## 2015.12.2
 - **drawBezier()**: Draw bezier curve.

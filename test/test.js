@@ -12,8 +12,9 @@ $(document).ready(function() {
 // console.log("====");
     var b = new EasyCanvas("canvas2");
 
-/*    b.drawLine({
-        points: [[10, 100], [200, 100], [10, 200]],
+    b.drawLine({
+        basic1: [[10, 100], [200, 100], [10, 200]],
+        basic: [[20, 100], [300, 100], [20, 200]],
         lineCap: "round",
         lineJoin: "round",
         lineWidth: 10,
@@ -22,7 +23,7 @@ $(document).ready(function() {
         // strokeLinerGradient: [0, 0, 170, 0],
         // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         closed: true
-    });*/
+    });
 
 /*    b.drawText({
         points: [[00, 100]],
@@ -135,7 +136,7 @@ $(document).ready(function() {
         ccw: false
     });*/
 
-    b.drawQuadratic({
+/*    b.drawQuadratic({
         shadow: [1, 1, 7, "#0f0"],
         color: "#0000ff",
         shadowColor: "#000",
@@ -147,12 +148,21 @@ $(document).ready(function() {
                 [10, 10, 10, 100, 100, 10],
                 [40, 100, 400, 10],
                 [50, 120, 300, 10]
-               ]
-    });
+               ],
+        closed: true
+    });*/
 
 /*    b.drawBezier({
         color: "#0000ff",
-        points: [[20, 20], [20, 100], [200, 100], [200, 20]]
+        basic: [
+                [25, 50, 175, 50, 25, 150, 175, 150],
+                [275, 150, 125, 1, 300, 50]
+               ],
+        basic1: [
+                [25, 80, 175, 50, 25, 150, 275, 150],
+                [275, 150, 125, 1, 300, 150]
+               ],
+        closed: true
     });*/
 
 });
