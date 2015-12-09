@@ -1,3 +1,9 @@
+## 2015.12.9
+__*Branch points*__:
+- Improve 'basic' setting to draw one shape.
+- Simplify the drawing function name.
+- Rewrite the api of drawLine(), drawBezier().
+
 ## 2015.12.8
 __*Branch points*__:
 - Rewrite the api of drawLine(), drawBezier().
