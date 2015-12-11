@@ -55,6 +55,12 @@
         fillRradialGradient: [75, 50, 5, 90, 60, 100]
     });*/
 
+/*    for (var i = 10; i < 50; i = i + 10) {
+        b.rect({
+            basic: [i, i, 300, 100]
+        });
+    }*/
+
 /*    b.square({
         basic: [40, 80, 100],
         basic1: [50, 90, 100],

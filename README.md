@@ -12,13 +12,11 @@ Welcome to join us~
     
     var A = new EasyCanvas("canvasId");
 
-## Settings
+## Common Style
 
 | Property | Value  | Default  |   Description  |
 |---|---|---|---|
-| ccw | "false": clockwise<br>"true": counter-clockwise. | "false" | Counterclockwise<br>(规定应该逆时针还是顺时针绘图) |
 | closed | Bool  | false  | Creates a path from the last point back to the starting point<br>(闭合图形)   |
-| endAngle | Radians | 2 * Math.PI | The ending  angle in radians(结束角，以弧度计) |
 | fillColor  |  Color   |  "transparent" |  Fill Color<br>(填充颜色)  |
 | fontColor  | Color  | "#000" |  Font color   |
 | fillLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for fill style<br>x0、y0 和 x1、y1:  填充线性渐变的起始点、结束点 |
@@ -27,14 +25,11 @@ Welcome to join us~
 | lineJoin |  "bevel"(斜角),<br>"round"(圆角),<br>"miter"(尖角) | "miter"  | The type of corner created, when two lines meet<br>(两条线相交时，所创建的拐角类型)  |
 | lineWidth  | Number  | 1 | Line width<br>(线条宽度)  |
 | points  |  Arrays  | [[0, 0], [0, 0]]  | Coordinate, [x1, y1] or [[x1, y1], [x2, y2], [x3, y3]...]. The format depands on particular drawing function.<br>([x1, y1]是起始坐标，坐标具体用法详见每个方法)  |
-| rectWidth | Number |  | Width of rectangle and Foursquare |
-| rectHeight | Number |  | Height of rectangle and Foursquare |
 | shadow  |  [Number, Number, Number, Color] | [1, 1, 1, "#fff"] | Shadow, [shadowX, shadowY, shadowBlur, shadowColor] |
 | shadowX |  Number |  | Vertical shadow |
 | shadowY |  Number |  | Horizontal shadow |
 | shadowBlur |  Number |  | Shadow blur |
 | shadowColor |  Color |  | Shadow color |
-| startAngle | Radians | 0 | The starting angle in radians(起始角，以弧度计。) |
 | strokeColor | Color  |  "#000" |  Outer line color for shape and text<br>(图形或文本描边的颜色)   |
 | fontColor  | Color  | "#000" |  Font color   |
 | strokeLinerGradient | Arrays |  | [x0, y0, x1, y1]<br>x0, y0 and x1, y1: The start and end point of the gradient for stroke style<br>x0、y0 和 x1、y1:  描边线性渐变的起始点、结束点 |
@@ -55,82 +50,150 @@ Welcome to join us~
 ## Drawing
 ### Line: line()
 
+- basic: [[x1, y1], [x2, y2], [x3, y3]...]
+
+| Property | Value  | Default  |   Description  |
+|---|---|---|---|
+| [x1, y1] | Number |  | The start coordinate of the line. |
+
 **Example:**
 
     A.line({
-        closed: true,
+        basic: [[10, 100], [200, 100], [10, 200]]
         lineCap: "round",
         lineWidth: 10,
-        filled: true,
         fillColor: "rgb(255,165,0)",
-    	points: [[10, 100], [200, 100], [10, 200]]
+    });
+
+    A.line({
+        basic1: [[10, 100], [200, 100], [10, 200]],
+        basic: [[20, 100], [300, 100], [20, 200]],
+        lineCap: "round",
+        lineJoin: "round",
+        lineWidth: 10,
+        fillColor: "rgb(255, 165, 0)",
+        strokeColor: "#00f",
+        // strokeLinerGradient: [0, 0, 170, 0],
+        // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
+        closed: true
     });
 
 ### Arc: arc()
 
+- basic: [x, y, radius, startAngle, endAngle, ccw]
+
+| Property | Value  | Default  |   Description  |
+|---|---|---|---|
+| x | Number |  | The x-coordinate of the center of the circle |
+| y | Number |  | The y-coordinate of the center of the circle |
+| radius | Number |  | The radius of the circle |
+| startAngle | Radians | 0 | The starting angle in radians(起始角，以弧度计。) |
+| endAngle | Radians | 2 * Math.PI | The ending  angle in radians(结束角，以弧度计) |
+| ccw | "false": clockwise<br>"true": counter-clockwise. | "false" | Counterclockwise<br>(规定应该逆时针还是顺时针绘图) |
+
 **Example:**
 
-    A.arc({
-        shadow: [1, 1, 7, "#0f0"],
-        strokeColor: "#0000ff",
-        points: [50, 50],
-        radius: 50,
-        startAngle: 50, 
-        endAngle: Math.PI,
-        ccw: false
+    b.arc({
+        basic1: [60, 60, 60, 0, Math.PI],
+        basic: [100, 100, 60, 0, Math.PI]
+        shadow: [0, 0, 7, "#f00"],
+        strokeColor: "#0000ff"
     });
 
 ### Quadratic curve: quadratic()
 
 **Example:**
 
-    A.quadratic({
+    b.quadratic({
         shadow: [1, 1, 7, "#0f0"],
         color: "#0000ff",
-        points: [[20, 20],[20,100,200,10]]
+        shadowColor: "#000",
+        basic: [60, 20, 20, 100, 200, 10],
+        basic1: [
+                [10, 10, 10, 100, 100, 150],
+                [40, 100, 250, 30],
+                [50, 120, 300, 60]
+               ],
+        // closed: true
     });
 
 ### Bezier curve: bezier()
 
 **Example:**
 
-    A.bezier({
+    b.bezier({
         color: "#0000ff",
-        points: [[20, 20], [20, 100], [200, 100], [200, 20]]
+        basic: [25, 50, 175, 50, 25, 150, 175, 150],
+        basic1: [
+                [25, 80, 175, 50, 25, 150, 275, 150],
+                [275, 150, 125, 1, 300, 150]
+               ],
+        // closed: true
     });
 
 ### Rectangle: rect()
 
+- basic: [x, y, rectWidth, rectHeight]
+
+| Property | Value  | Default  |   Description  |
+|---|---|---|---|
+| x | Number |  | The x-coordinate of the upper-left corner of the rectangle |
+| y | Number |  | The y-coordinate of the upper-left corner of the rectangle |
+| rectWidth | Number |  | Width of rectangle |
+| rectHeight | Number |  | Height of rectangle |
+
 **Example:**
 
     A.rect({
-        points: [10, 50],
-        rectWidth: 300,
-        rectHeight: 200,
+        basic: [10, 50, 300, 100],
+        basic1: [40, 80, 300, 100],
         fillRradialGradient: [75, 50, 5, 90, 60, 100]
     });
 
+    for (var i = 10; i < 50; i = i + 10) {
+        A.rect({
+            basic: [i, i, 300, 100]
+        });
+    }
+
 ### Foursquare: square()
+
+- basic: [x, y, width]
+
+| Property | Value  | Default  |   Description  |
+|---|---|---|---|
+| x | Number |  | The x-coordinate of the upper-left corner of the foursquare |
+| y | Number |  | The y-coordinate of the upper-left corner of the foursquare |
+| width | Number |  | Width of foursquare |
 
 **Example:**
 
-    A.square({
-        points: [20, 60],
-        rectWidth: 300  
+    b.square({
+        basic: [40, 80, 100],
+        basic1: [50, 90, 100],
+        fillColor: "#000"
     });
 
 ### Text: text()
+- basic: [x, y, text, maxWidth]
+
+| Property | Value  | Default  |   Description  |
+|---|---|---|---|
+| x | Number |  | The x coordinate where to start painting the text |
+| y | Number |  | The y coordinate where to start painting the text |
+| text | String |  | Width of rectangle and foursquare |
+| maxWidth | Number | | Optional. The maximum allowed width of the text, in pixels|
 
 **Example:**
 
     A.text({
-        points: [10, 100],
+        basic: [10, 100, "basic"],
+        basic1: [10, 130, "basic1"]
         lineWidth: 10,
         shadow: [1, 1, 7, "#0f0"],
         linerGridient: [0, 0, 170, 0],
         stop: [[0, "black"], [0.3,"magenta"],[0.5,"blue"],[0.6,"green"],[0.8,"yellow"],[1,"red"]],
         font: "30px Arial Black",
-        text: "Hello World",
         strokeText: true
     });
 

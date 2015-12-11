@@ -262,7 +262,7 @@
 				var basic = bs["basic" + i];
 
 				// Counterclockwise
-				if (basic[5] == "undefined") {
+				if (basic[5] === undefined) {
 					basic[5] = false;
 				}
 
@@ -368,11 +368,6 @@
 			for (var i = 0; i < Object.keys(bs).length; i++) {
 				var basic = bs["basic" + i];
 
-				// Counterclockwise
-				if (basic[5] == "undefined") {
-					basic[5] = false;
-				}
-
 				this.ctx.beginPath();
 				this.ctx.rect(basic[0], basic[1], basic[2], basic[3]);
 
@@ -429,18 +424,19 @@
 				this.ctx.font = opt.font;
 				this.ctx.textBaseline = opt.textBaseline;
 				this.ctx.textAlign = opt.textAlign;
-				this.ctx.fillText(basic[2], basic[0], basic[1]);
-				this.ctx.strokeText(basic[2], basic[0], basic[1]);
+
+				if (basic[3] === undefined) {
+					
+					this.ctx.fillText(basic[2], basic[0], basic[1]);
+					this.ctx.strokeText(basic[2], basic[0], basic[1]);
+				} else {
+					this.ctx.fillText(basic[2], basic[0], basic[1], basic[3]);
+					this.ctx.strokeText(basic[2], basic[0], basic[1], basic[3]);
+				}
 
 				this._draw();
 
 			}
-			/*
-			this.ctx.font = opt.font;
-			this.ctx.textBaseline = opt.textBaseline;
-			this.ctx.textAlign = opt.textAlign;
-			this.ctx.fillText(opt.text, opt.points[0], opt.points[1]);
-			this.ctx.strokeText(opt.text, opt.points[0], opt.points[1]);*/
 
 			this.ctx.closePath();
 
