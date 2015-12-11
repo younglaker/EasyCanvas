@@ -209,7 +209,7 @@
 	function _enhanceBasic (bs) {
 		for (var i = 0; i < Object.keys(bs).length; i++) {
 			
-			// 把画单一图形形式的 basic=[] 处理为画多个图形形式的  basic=[[]]
+			// 把画单一图形形式的 basic=[ ] 处理为画多个图形形式的  basic=[ [ ] ]
 			if (typeof bs["basic" + i][0] === "number") {
 				var tmp = bs["basic" + i];
 				bs["basic" + i] = [];

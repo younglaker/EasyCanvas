@@ -1,3 +1,7 @@
+## 2015.12.10
+- Finish rewriting the continously drawing api.
+- Merge branch points to master and update the documents.
+
 ## 2015.12.9
 __*Branch points*__:
 - Improve 'basic' setting to draw one shape.
