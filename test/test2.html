@@ -7,12 +7,19 @@
 <body onload="">
     <div class="main">
         <canvas id="canvas" width="550" height="500"></canvas>
-        <canvas id="canvas2" width="550" height="500"></canvas>
     </div>
-    <!--script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script-->
-    <script type="text/javascript" src="../EasyCanvas.js"></script>
-    <script type="text/javascript" src="test.js"></script>
     <script type="text/javascript">
+		canvas = document.getElementById("canvas");
+		ctx = canvas.getContext("2d");
+
+		ctx.beginPath();
+
+		ctx.moveTo(25, 50);
+		ctx.bezierCurveTo( 175, 50, 25, 150, 175, 150);
+
+		// ctx.fill();
+		ctx.stroke();
+		ctx.closePath();
     </script>
 </body>
 </html>

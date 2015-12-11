@@ -53,11 +53,11 @@ Welcome to join us~
 | height | The height of canvas | var h = A.height; |
 
 ## Drawing
-### Line: drawLine()
+### Line: line()
 
 **Example:**
 
-    A.drawLine({
+    A.line({
         closed: true,
         lineCap: "round",
         lineWidth: 10,
@@ -66,11 +66,11 @@ Welcome to join us~
     	points: [[10, 100], [200, 100], [10, 200]]
     });
 
-### Arc: drawArc()
+### Arc: arc()
 
 **Example:**
 
-    A.drawArc({
+    A.arc({
         shadow: [1, 1, 7, "#0f0"],
         strokeColor: "#0000ff",
         points: [50, 50],
@@ -80,50 +80,50 @@ Welcome to join us~
         ccw: false
     });
 
-### Quadratic curve: drawQuadratic()
+### Quadratic curve: quadratic()
 
 **Example:**
 
-    A.drawQuadratic({
+    A.quadratic({
         shadow: [1, 1, 7, "#0f0"],
         color: "#0000ff",
         points: [[20, 20],[20,100,200,10]]
     });
 
-### Bezier curve: drawBezier()
+### Bezier curve: bezier()
 
 **Example:**
 
-    A.drawBezier({
+    A.bezier({
         color: "#0000ff",
         points: [[20, 20], [20, 100], [200, 100], [200, 20]]
     });
 
-### Rectangle: drawRect()
+### Rectangle: rect()
 
 **Example:**
 
-    A.drawRect({
+    A.rect({
         points: [10, 50],
         rectWidth: 300,
         rectHeight: 200,
         fillRradialGradient: [75, 50, 5, 90, 60, 100]
     });
 
-### Foursquare: drawSquare()
+### Foursquare: square()
 
 **Example:**
 
-    A.drawSquare({
+    A.square({
         points: [20, 60],
         rectWidth: 300  
     });
 
-### Text: drawText()
+### Text: text()
 
 **Example:**
 
-    A.drawText({
+    A.text({
         points: [10, 100],
         lineWidth: 10,
         shadow: [1, 1, 7, "#0f0"],
@@ -160,12 +160,14 @@ Draw the coordinate of canvas in order to use canvas easierly.
 
 **Example:**
 
-    A.drawRect({
+    A.rect({        
+        basic: [10, 50, 300, 100],
         fillColor: "#000"
     })
     .clean();  // Clean the whole canvas
 
-    A.drawRect({
+    A.rect({
+        basic: [10, 50, 300, 100],
         fillColor: "#000"
     })
     .clean(20, 20, 100, 100);  // Clean the some parts
@@ -181,7 +183,8 @@ Draw the coordinate of canvas in order to use canvas easierly.
 
 ## Improvements
 
-- [ ] Continuously drawing
+- [ ] Depart some specific property from basic
+- [x] Continuously drawing
 - [x] Remove strokeText property
 
 ## Bugs

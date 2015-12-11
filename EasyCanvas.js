@@ -10,6 +10,7 @@
 		this.width = this.canvas.width;
 		this.height = this.canvas.height;
 		this.defaults = {
+			basic: false,
 			ccw: false,
 			closed: false,
 			endAngle: 2 * Math.PI,
@@ -40,6 +41,15 @@
 		};
 
 		/*
+		*  Draw
+		*/
+		this._draw = function () {
+			this.ctx.fill();
+			this.ctx.stroke();
+			this.ctx.closePath();
+		}
+
+		/*
 		*  Renew defaults with original defaults
 		*/
 		this._renewDefaults = function () {
@@ -48,6 +58,7 @@
 	};
 
 	var g_defaults = {
+		basic: false,
 		ccw: false,
 		closed: false,
 		endAngle: 2 * Math.PI,
@@ -170,28 +181,69 @@
 		ctx.beginPath();
 	}
 
+	/*
+	*  Set basic style
+	*/
+	function _dealBasic (opt, enhance) {
+		var bs = {};
+
+    	// 遍历所有设置
+		for (var i in opt) {
+			// 把 basic 设置放入 bs
+			if (!!i.match(/basic/)) {
+				// 给 “baisc” 填充成 “baisc0”，方便后续遍历
+				bs[!!i.match(/basic\d+/) ? i : i + "0"] = opt[i];
+			}	
+		}
+
+		if (enhance) {
+			bs = _enhanceBasic(bs);
+		}
+
+		return bs;
+	}
+
+	/*
+	*  Set basic=[ ] to basic=[ [ ] ]
+	*/
+	function _enhanceBasic (bs) {
+		for (var i = 0; i < Object.keys(bs).length; i++) {
+			
+			// 把画单一图形形式的 basic=[] 处理为画多个图形形式的  basic=[[]]
+			if (typeof bs["basic" + i][0] === "number") {
+				var tmp = bs["basic" + i];
+				bs["basic" + i] = [];
+				bs["basic" + i][0] = tmp;
+			}	
+		}
+	    return bs;
+	}
+
 	CanvasObj.prototype = {
 		/*
 		*  Draw line
 		*/
-		drawLine: function (settings) {
-			var opt = _extendDefaults(this.defaults , settings);
+		line: function (settings) {
+			var opt = _extendDefaults(this.defaults, settings);
+			var bs = _dealBasic(opt);
 			
 			_setOpt(this.ctx, opt);
-			this.ctx.moveTo(opt.points[0][0], opt.points[0][1]);
+			
+			for (var i = 0; i < Object.keys(bs).length; i++) {
+				var basic = bs["basic" + i];
 
-			for (var i = 1; i < opt.points.length; i++) {
-				this.ctx.lineTo(opt.points[i][0], opt.points[i][1]);
+				this.ctx.moveTo(basic[0][0], basic[0][1]);
+
+				for (var j = 1; j < basic.length; j++) {
+					this.ctx.lineTo(basic[j][0], basic[j][1]);
+				}
+
+				if (opt.closed) {
+					this.ctx.lineTo(basic[0][0], basic[0][1]);
+				}
 			}
 
-			if (opt.closed) {
-				this.ctx.lineTo(opt.points[0][0], opt.points[0][1]);
-			}
-
-			this.ctx.fill();
-			this.ctx.stroke();
-			this.ctx.closePath();
-
+			this._draw();
 			this._renewDefaults();
 
 			return this;
@@ -200,16 +252,29 @@
 		/*
 		*  Draw arc
 		*/
-		drawArc: function (settings) {
+		arc: function (settings) {
 			var opt = _extendDefaults(this.defaults, settings);
+			var bs = _dealBasic(opt);
 			
 			_setOpt(this.ctx, opt);
 
-			this.ctx.arc(opt.points[0], opt.points[1], opt.radius, opt.startAngle, opt.endAngle, opt.ccw);
+			for (var i = 0; i < Object.keys(bs).length; i++) {
+				var basic = bs["basic" + i];
 
-			this.ctx.fill();
-			this.ctx.stroke();
-			this.ctx.closePath();
+				// Counterclockwise
+				if (basic[5] == "undefined") {
+					basic[5] = false;
+				}
+
+				this.ctx.beginPath();
+				this.ctx.arc(basic[0], basic[1], basic[2], basic[3], basic[4], basic[5]);
+
+				if (opt.closed) {
+					this.ctx.lineTo(basic[0][0], basic[0][1]);
+				}
+				this._draw();
+
+			}
 
 			this._renewDefaults();
 
@@ -219,19 +284,35 @@
 		/*
 		 *  Draw quadratic curve
 		 */
-		drawQuadratic: function(settings) {
+		quadratic: function(settings) {
 			var opt = _extendDefaults(this.defaults, settings);
-			var points = opt.points;
+			var bs = _dealBasic(opt, true);
 
 			_setOpt(this.ctx, opt);
+
+			for (var i = 0; i < Object.keys(bs).length; i++) {
+				var basic = bs["basic" + i];
+
+				this.ctx.beginPath();
+
+				for (var j = 0; j < basic.length; j++) {
+
+					if (j === 0) {	// basic0
+						this.ctx.moveTo(basic[j][0], basic[j][1]);
+						this.ctx.quadraticCurveTo(basic[j][2], basic[j][3], basic[j][4], basic[j][5]);
+
+					} else {	// 其他basic使用上一笔画的结束点作为此笔画的起始点
+						this.ctx.moveTo(basic[j - 1][4], basic[j - 1][5]);
+						this.ctx.quadraticCurveTo(basic[j][0], basic[j][1], basic[j][2], basic[j][3]);
+					}
+				}
+
+				if (opt.closed) {
+					this.ctx.lineTo(basic[0][0], basic[0][1]);
+				}
+				this._draw();
+			}
 			
-			this.ctx.moveTo(points[0][0], points[0][1]);
-			this.ctx.quadraticCurveTo(points[1][0], points[1][1], points[2][0], points[2][1]);
-
-			this.ctx.fill();
-			this.ctx.stroke();
-			this.ctx.closePath();
-
 			this._renewDefaults();
 			
 			return this;
@@ -240,18 +321,35 @@
 		/*
 		 *  Draw bezier curve
 		 */
-		drawBezier: function(settings) {
+		bezier: function(settings) {
 			var opt = _extendDefaults(this.defaults, settings);
-			var points = opt.points;
+			var bs = _dealBasic(opt, true);
 
 			_setOpt(this.ctx, opt);
-			
-			this.ctx.moveTo(points[0][0], points[0][1]);
-			this.ctx.bezierCurveTo(points[1][0], points[1][1], points[2][0], points[2][1], points[3][0], points[3][1]);
 
-			this.ctx.fill();
-			this.ctx.stroke();
-			this.ctx.closePath();
+			for (var i = 0; i < Object.keys(bs).length; i++) {
+				var basic = bs["basic" + i];
+
+				this.ctx.beginPath();
+
+				for (var j = 0; j < basic.length; j++) {
+
+					if (j === 0) {	// basic0
+						this.ctx.moveTo(basic[j][0], basic[j][1]);
+						this.ctx.bezierCurveTo(basic[j][2], basic[j][3], basic[j][4], basic[j][5], basic[j][6], basic[j][7]);
+
+					} else {	// 其他basic使用上一笔画的结束点作为此笔画的起始点
+						this.ctx.moveTo(basic[j - 1][6], basic[j - 1][7]);
+						this.ctx.bezierCurveTo(basic[j][0], basic[j][1], basic[j][2], basic[j][3], basic[j][4], basic[j][5]);
+					}
+				}
+
+				if (opt.closed) {
+					this.ctx.lineTo(basic[0][0], basic[0][1]);
+				}
+
+				this._draw();
+			}
 
 			this._renewDefaults();
 			
@@ -261,17 +359,27 @@
 		/*
 		*  Draw rectangle
 		*/
-		drawRect: function (settings) {
-			var opt = _extendDefaults(this.defaults , settings);
+		rect: function (settings) {
+			var opt = _extendDefaults(this.defaults, settings);
+			var bs = _dealBasic(opt);
 
 			_setOpt(this.ctx, opt);
 
-			this.ctx.rect(opt.points[0], opt.points[1], opt.rectWidth, opt.rectHeight);
+			for (var i = 0; i < Object.keys(bs).length; i++) {
+				var basic = bs["basic" + i];
 
-			this.ctx.fill();
-			this.ctx.stroke();
-			this.ctx.closePath();
+				// Counterclockwise
+				if (basic[5] == "undefined") {
+					basic[5] = false;
+				}
 
+				this.ctx.beginPath();
+				this.ctx.rect(basic[0], basic[1], basic[2], basic[3]);
+
+				this._draw();
+			}
+
+			this._draw();
 			this._renewDefaults();
 
 			return this;
@@ -280,16 +388,22 @@
 		/*
 		*  Draw rectangle
 		*/
-		drawSquare: function (settings) {
-			var opt = _extendDefaults(this.defaults , settings);
+		square: function (settings) {
+			var opt = _extendDefaults(this.defaults, settings);
+			// var bs = _dealBasic(opt);
+			var sqOpt;
 
 			_setOpt(this.ctx, opt);
 
-			this.drawRect({
-				points: [opt.points[0], opt.points[1]],
-				rectWidth: opt.rectWidth,
-				rectHeight: opt.rectWidth,
-			});
+	    	// 遍历所有设置
+			for (var i in opt) {
+				if (!!i.match(/basic/)) {
+					// 把正方形的边长赋值为矩形方法的高
+					opt[i][3] = opt[i][2];
+				}	
+			}
+			
+			this.rect(opt);
 
 			this._renewDefaults();
 
@@ -299,19 +413,34 @@
 		/*
 		*  Draw text
 		*/
-		drawText: function (settings) {
+		text: function (settings) {
 			this.defaults.fillColor = "#000";
 			this.defaults.strokeColor = "transparent";
 
 			var opt = _extendDefaults(this.defaults, settings);
+			var bs = _dealBasic(opt);
 
 			_setOpt(this.ctx, opt);
 
+			for (var i = 0; i < Object.keys(bs).length; i++) {
+				var basic = bs["basic" + i];
+
+				this.ctx.beginPath();
+				this.ctx.font = opt.font;
+				this.ctx.textBaseline = opt.textBaseline;
+				this.ctx.textAlign = opt.textAlign;
+				this.ctx.fillText(basic[2], basic[0], basic[1]);
+				this.ctx.strokeText(basic[2], basic[0], basic[1]);
+
+				this._draw();
+
+			}
+			/*
 			this.ctx.font = opt.font;
 			this.ctx.textBaseline = opt.textBaseline;
 			this.ctx.textAlign = opt.textAlign;
 			this.ctx.fillText(opt.text, opt.points[0], opt.points[1]);
-			this.ctx.strokeText(opt.text, opt.points[0], opt.points[1]);
+			this.ctx.strokeText(opt.text, opt.points[0], opt.points[1]);*/
 
 			this.ctx.closePath();
 
