@@ -8,9 +8,11 @@ Welcome to join us~
 
 ## Init
 
+```
     <canvas id="canvasId" width="550" height="500"></canvas>
-    
+
     var A = new EasyCanvas("canvasId");
+```
 
 ## Common Style
 
@@ -56,7 +58,7 @@ Welcome to join us~
 - **Usage of 'basic':**
 
 ```
-basic: [[x1, y1], [x2, y2], [x3, y3]...]
+    basic: [[x1, y1], [x2, y2], [x3, y3]...]
 ```
 
 | Property | Value  | Default  |   Description  |
@@ -94,7 +96,7 @@ basic: [[x1, y1], [x2, y2], [x3, y3]...]
 - **Usage of 'basic':**
 
 ```
-basic: [x, y, radius, startAngle, endAngle, ccw]
+    basic: [x, y, radius, startAngle, endAngle, ccw]
 ```
 
 | Property | Value  | Default  |   Description  |
@@ -118,13 +120,14 @@ basic: [x, y, radius, startAngle, endAngle, ccw]
 ### Quadratic curve: quadratic()
 
 - **Usage of 'basic':**
-```
-basic: [startX, startY, controlX, controlY, endX, endY]
 
-basic: [  
-            [startX, startY, controlX, controlY, endX, endY],  
-            [controlX, controlY, endX, endY]  
-        ]
+```
+    basic: [startX, startY, controlX, controlY, endX, endY]
+
+    basic: [
+                [startX, startY, controlX, controlY, endX, endY],
+                [controlX, controlY, endX, endY]
+            ]
 ```
 
 | Property | Value  | Default  |   Description  |
@@ -153,11 +156,11 @@ basic: [
 ### Bezier curve: bezier()
 
 ```
-basic: [startX, startY, control1X, control1Y, control2X, control2Y, endX, endY]
-basic: [  
-            [startX, startY, control1X, control1Y, control2X, control2Y, endX, endY],  
-            [control1X, control1Y, control2X, control2Y, endX, endY]  
-        ]  
+    basic: [startX, startY, control1X, control1Y, control2X, control2Y, endX, endY]
+    basic: [
+                [startX, startY, control1X, control1Y, control2X, control2Y, endX, endY],
+                [control1X, control1Y, control2X, control2Y, endX, endY]
+            ]
 ```
 
 | Property | Value  | Default  |   Description  |
@@ -186,7 +189,7 @@ basic: [
 - **Usage of 'basic':**
 
 ```
-basic: [x, y, rectWidth, rectHeight]
+    basic: [x, y, rectWidth, rectHeight]
 ```
 
 | Property | Value  | Default  |   Description  |
@@ -215,7 +218,7 @@ basic: [x, y, rectWidth, rectHeight]
 - **Usage of 'basic':**
 
 ```
-basic: [x, y, width]
+    basic: [x, y, width]
 ```
 
 | Property | Value  | Default  |   Description  |
@@ -283,9 +286,11 @@ Draw the coordinate of canvas in order to use canvas easierly.
 
 - **Example:**
 
+```
 	A.coordinate(); // Draw the whole canvas
 
 	A.coordinate(100, true, "rgb(255, 165, 0)");
+```
 
 ### Clean canvas: clean(x, y, width, heigh);
 
@@ -295,8 +300,9 @@ Draw the coordinate of canvas in order to use canvas easierly.
 | width, heigh | Number |  | The width and heigh of the rectangle |
 
 - **Example:**
+
 ```
-    A.rect({        
+    A.rect({
         basic: [10, 50, 300, 100],
         fillColor: "#000"
     })
@@ -316,6 +322,7 @@ Draw the coordinate of canvas in order to use canvas easierly.
 - [ ] Pattern stroke and fill style
 - [ ] Transformations
 - [ ] Image
+- [ ] Save canvas as image
 
 ## Improvements
 

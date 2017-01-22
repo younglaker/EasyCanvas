@@ -100,7 +100,7 @@
 		}
 		return source;
 	}
-	
+
 	/*
 	*  Deal with fillStyle for color/gridient/patten
 	*/
@@ -193,7 +193,7 @@
 			if (!!i.match(/basic/)) {
 				// 给 “baisc” 填充成 “baisc0”，方便后续遍历
 				bs[!!i.match(/basic\d+/) ? i : i + "0"] = opt[i];
-			}	
+			}
 		}
 
 		if (enhance) {
@@ -208,13 +208,13 @@
 	*/
 	function _enhanceBasic (bs) {
 		for (var i = 0; i < Object.keys(bs).length; i++) {
-			
+
 			// 把画单一图形形式的 basic=[ ] 处理为画多个图形形式的  basic=[ [ ] ]
 			if (typeof bs["basic" + i][0] === "number") {
 				var tmp = bs["basic" + i];
 				bs["basic" + i] = [];
 				bs["basic" + i][0] = tmp;
-			}	
+			}
 		}
 	    return bs;
 	}
@@ -226,9 +226,9 @@
 		line: function (settings) {
 			var opt = _extendDefaults(this.defaults, settings);
 			var bs = _dealBasic(opt);
-			
+
 			_setOpt(this.ctx, opt);
-			
+
 			for (var i = 0; i < Object.keys(bs).length; i++) {
 				var basic = bs["basic" + i];
 
@@ -255,7 +255,7 @@
 		arc: function (settings) {
 			var opt = _extendDefaults(this.defaults, settings);
 			var bs = _dealBasic(opt);
-			
+
 			_setOpt(this.ctx, opt);
 
 			for (var i = 0; i < Object.keys(bs).length; i++) {
@@ -312,9 +312,9 @@
 				}
 				this._draw();
 			}
-			
+
 			this._renewDefaults();
-			
+
 			return this;
 		},
 
@@ -352,7 +352,7 @@
 			}
 
 			this._renewDefaults();
-			
+
 			return this;
 		},
 
@@ -395,16 +395,16 @@
 				if (!!i.match(/basic/)) {
 					// 把正方形的边长赋值为矩形方法的高
 					opt[i][3] = opt[i][2];
-				}	
+				}
 			}
-			
+
 			this.rect(opt);
 
 			this._renewDefaults();
 
 			return this;
 		},
-		
+
 		/*
 		*  Draw text
 		*/
@@ -426,7 +426,7 @@
 				this.ctx.textAlign = opt.textAlign;
 
 				if (basic[3] === undefined) {
-					
+
 					this.ctx.fillText(basic[2], basic[0], basic[1]);
 					this.ctx.strokeText(basic[2], basic[0], basic[1]);
 				} else {
