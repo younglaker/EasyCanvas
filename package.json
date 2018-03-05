@@ -1,0 +1,22 @@
+{
+  "name": "easycanvas",
+  "version": "1.0.0",
+  "description": "HTML5 Canvas Library",
+  "main": "EasyCanvas.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/younglaker/EasyCanvas.git"
+  },
+  "author": "Laker Huang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/younglaker/EasyCanvas/issues"
+  },
+  "homepage": "https://github.com/younglaker/EasyCanvas#readme"
+}
