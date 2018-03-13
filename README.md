@@ -4,6 +4,12 @@ A HTML5 canvas library based on pure JavaScript.
 
 Welcome to join us~
 
+# Who use this？
+
+[Pixeler](http://laker.me/pixeler/), a app of designing pixel picture.
+
+    If you use EasyCanvas in your projects too, welcome to show your projects here.
+
 # Documents
 
 ## Init
@@ -287,9 +293,9 @@ Draw the coordinate of canvas in order to use canvas easierly.
 - **Example:**
 
 ```
-	A.coordinate(); // Draw the whole canvas
+    A.coordinate(); // Draw the whole canvas
 
-	A.coordinate(100, true, "rgb(255, 165, 0)");
+    A.coordinate(100, true, "rgb(255, 165, 0)");
 ```
 
 ### Clean canvas: clean(x, y, width, heigh);
