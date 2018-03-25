@@ -280,22 +280,22 @@ basic: [x, y, text, maxWidth]
 ```
 
 ## Layer
-### Reference line: coordinate(grid_width, coodiful, color)
+### Reference line: coordinates(grid_width, coodiful, color)
 
-Draw the coordinate of canvas in order to use canvas easierly.
+Draw grids of canvas in order to draw canvas more easily.
 
 | Property | Value  | Default  |   Description  |
 |---|---|---|---|
 | grid_width | Number  | 50  | The width of each grid  |
-| coodiful | Bool  | false  | Whether show the coordinate |
+| coodiful | Bool  | false  | Whether show the coordinate number |
 | color | Css color  | "#000"  | The color of line and text  |
 
 - **Example:**
 
 ```
-    A.coordinate(); // Draw the whole canvas
+    A.coordinates(); // Draw the whole canvas without coordinates bumber
 
-    A.coordinate(100, true, "rgb(255, 165, 0)");
+    A.coordinates(100, true, "rgb(255, 165, 0)"); // Apply coorfinates number
 ```
 
 ### Clean canvas: clean(x, y, width, heigh);
@@ -327,8 +327,9 @@ Draw the coordinate of canvas in order to use canvas easierly.
 
 - [ ] Pattern stroke and fill style
 - [ ] Transformations
-- [ ] Image
+- [ ] Draw image,http://www.runoob.com/tags/canvas-drawimage.html
 - [ ] Save canvas as image
+- [ ] copy(),http://www.runoob.com/tags/canvas-putimagedata.html
 
 ## Improvements
 

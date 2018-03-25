@@ -459,9 +459,9 @@
     },
 
     /*
-     *  Draw layer coordinate
+     *  Draw layer grids
      */
-    coordinate: function(grid_width, coodiful, color) {
+    coordinates: function(grid_width, coodiful, color) {
       grid_width = grid_width || 50;
       coodiful = coodiful || false;
       color = color || "#000";
@@ -473,38 +473,32 @@
 
       if (coodiful) {
         for (var i = 0; i <= x; i++) { //绘制列
-          this.drawLine({
-            points: [
+          this.line({
+            basic: [
               [i * grid_width, 0],
               [i * grid_width, y * grid_width]
             ]
-          }).drawText({
-            text: i * grid_width,
-            points: [
-              [i * grid_width, 10]
-            ],
+          }).text({
+            basic: [i * grid_width, 10, i * grid_width],
             fontColor: color
           });
         }
 
         for (var i = 0; i <= y; i++) { //绘制行
-          this.drawLine({
-            points: [
+          this.line({
+            basic: [
               [0, i * grid_width],
               [x * grid_width, i * grid_width]
             ]
-          }).drawText({
-            text: i * grid_width,
-            points: [
-              [0, i * grid_width]
-            ]
+          }).text({
+            basic: [10, i * grid_width, i * grid_width],
           });
         }
 
       } else {
         for (var i = 0; i <= x; i++) { //绘制列
-          this.drawLine({
-            points: [
+          this.line({
+            basic: [
               [i * grid_width, 0],
               [i * grid_width, y * grid_width]
             ]
@@ -512,8 +506,8 @@
         }
 
         for (var i = 0; i <= y; i++) { //绘制行
-          this.drawLine({
-            points: [
+          this.line({
+            basic: [
               [0, i * grid_width],
               [x * grid_width, i * grid_width]
             ]

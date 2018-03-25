@@ -5,13 +5,13 @@
         startPoint: {x: 20, y: 20},
         endPoint: {x: 50, y: 50}
     }).line({
-    	color: "#00f",
-    	startPoint: {x: 50,	y: 50},
+        color: "#00f",
+        startPoint: {x: 50, y: 50},
         endPoint: {x: 0, y: 60}
     });*/
 // console.log("====");
-    var b = new EasyCanvas("canvas2");
-
+var b = new EasyCanvas("canvas2");
+b.coordinate();
 /*    b.line({
         basic1: [[10, 100], [200, 100], [10, 200]],
         basic: [[20, 100], [300, 100], [20, 200]],
@@ -74,12 +74,12 @@
     })
     .clean(20, 20, 100, 100);*/
 
-    b.text({
-        basic: [10, 100, "basic"],
-        basic1: [10, 130, "basic1"]
-        // points: [[0, 100]],
-        // text: "alphabetic",
-    });
+b.text({
+  basic: [10, 100, "basic"],
+  basic1: [10, 130, "basic1"]
+  // points: [[0, 100]],
+  // text: "alphabetic",
+});
 
 /*    b.line({
         points: [[150, 20], [150, 170]]
@@ -144,31 +144,31 @@
         textBaseline: "bottom",
     });*/
 
-    b.arc({
-        shadow: [0, 0, 7, "#f00"],
-        strokeColor: "#0000ff",
-        // basic: [50, 50, 50, 0, Math.PI],
-        basic1: [60, 60, 60, 0, Math.PI],
-        basic: [100, 100, 60, 0, Math.PI]
-        // points: [],
-        // radius: 50,
-        // startAngle: 50, 
-        // endAngle: Math.PI,
-        // ccw: false
-    });
+b.arc({
+  shadow: [0, 0, 7, "#f00"],
+  strokeColor: "#0000ff",
+  // basic: [50, 50, 50, 0, Math.PI],
+  basic1: [60, 60, 60, 0, Math.PI],
+  basic: [100, 100, 60, 0, Math.PI]
+  // points: [],
+  // radius: 50,
+  // startAngle: 50, 
+  // endAngle: Math.PI,
+  // ccw: false
+});
 
-    b.quadratic({
-        shadow: [1, 1, 7, "#0f0"],
-        color: "#0000ff",
-        shadowColor: "#000",
-        basic: [60, 20, 20, 100, 200, 10],
-        basic1: [
-                [10, 10, 10, 100, 100, 150],
-                [40, 100, 250, 30],
-                [50, 120, 300, 60]
-               ],
-        // closed: true
-    });
+b.quadratic({
+  shadow: [1, 1, 7, "#0f0"],
+  color: "#0000ff",
+  shadowColor: "#000",
+  basic: [60, 20, 20, 100, 200, 10],
+  basic1: [
+    [10, 10, 10, 100, 100, 150],
+    [40, 100, 250, 30],
+    [50, 120, 300, 60]
+  ],
+  // closed: true
+});
 
 /*    b.bezier({
         color: "#0000ff",
