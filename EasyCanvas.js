@@ -529,6 +529,19 @@
       }
 
       return this;
+    },
+
+    /*
+     *  Sav canvas to image
+     */
+    toImg: function(save_btn_id, img_name) {
+      var button = document.getElementById(save_btn_id);
+      img_name = img_name || "mypainting";
+      canvas = this.canvas;
+      button.href = canvas.toDataURL("image/png", 1.0);
+      button.download = img_name;
+
+      return this;
     }
   };
 

@@ -321,6 +321,30 @@ Draw grids of canvas in order to draw canvas more easily.
     .clean(20, 20, 100, 100);  // Clean the some parts
 ```
 
+
+### Save canvas to image: toImg(save_btn_id, img_name);
+
+Save canvas to png image.
+
+| Property | Value  | Default  |   Description  |
+|---|---|---|---|
+| save_btn_id | String |  | The id of save button( using <a> tag, not <button>) |
+| img_name | String | "mypainting" | The name of saving image |
+
+
+- **Example:**
+
+```
+    <input id="pic_name" type="text">
+    <a href="#" id="save_canvas">Save</a>
+    // using <a> tag, not <button>
+
+    $("#save_canvas").click(function() {
+        A.toImg('save_canvas', $("#pic_name").val());
+    });
+```
+
+
 # To-Do
 
 ## Functions
@@ -328,7 +352,7 @@ Draw grids of canvas in order to draw canvas more easily.
 - [ ] Pattern stroke and fill style
 - [ ] Transformations
 - [ ] Draw image,http://www.runoob.com/tags/canvas-drawimage.html
-- [ ] Save canvas as image
+- [x] Save canvas to image
 - [ ] copy(),http://www.runoob.com/tags/canvas-putimagedata.html
 
 ## Improvements

@@ -11,7 +11,16 @@
     });*/
 // console.log("====");
 var b = new EasyCanvas("canvas2");
-b.coordinate();
+b.coordinates();
+
+
+$("#save_canvas").click(function() {
+
+  b.toImg('save_canvas', $("#pic_name").val());
+});
+
+
+
 /*    b.line({
         basic1: [[10, 100], [200, 100], [10, 200]],
         basic: [[20, 100], [300, 100], [20, 200]],
