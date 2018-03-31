@@ -6,7 +6,7 @@ Welcome to join us~
 
 # Who use this？
 
-[Pixeler](http://laker.me/pixeler/), a app of designing pixel picture.
+[Pixeler](http://laker.me/pixeler/), an app of designing pixel picture.
 
     If you use EasyCanvas in your projects too, welcome to show your projects here.
 
@@ -305,6 +305,13 @@ Draw grids of canvas in order to draw canvas more easily.
 | x, y | Number |  | The coordinate of start point |
 | width, heigh | Number |  | The width and heigh of the rectangle |
 
+- **Usage**
+
+```
+    clean() : Clean the whole canvas
+    clean(x, y, width, heigh) : Clean some parts
+```
+
 - **Example:**
 
 ```
@@ -318,7 +325,7 @@ Draw grids of canvas in order to draw canvas more easily.
         basic: [10, 50, 300, 100],
         fillColor: "#000"
     })
-    .clean(20, 20, 100, 100);  // Clean the some parts
+    .clean(20, 20, 100, 100);  // Clean some parts
 ```
 
 
@@ -326,10 +333,10 @@ Draw grids of canvas in order to draw canvas more easily.
 
 Save canvas to png image.
 
-| Property | Value  | Default  |   Description  |
+| Property | Value  | Default | Required |   Description  |
 |---|---|---|---|
-| save_btn_id | String |  | The id of save button( using <a> tag, not <button>) |
-| img_name | String | "mypainting" | The name of saving image |
+| save_btn_id | String | | Yes | The id of save button( using <a> tag, not <button>) |
+| img_name | String | "mypainting" | | The name of saving image |
 
 
 - **Example:**
