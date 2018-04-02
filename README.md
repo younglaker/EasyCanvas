@@ -292,10 +292,16 @@ Draw grids of canvas in order to draw canvas more easily.
 
 - **Example:**
 
+![A.coordinates(100, true);](./doc_img/coordinates.png)
+
 ```
     A.coordinates(); // Draw the whole canvas without coordinates bumber
 
-    A.coordinates(100, true, "rgb(255, 165, 0)"); // Apply coorfinates number
+    A.coordinates(20); // Set each grid width as 20px
+
+    A.coordinates(100, true); // Set each grid width as 100px and show coorfinates number
+
+    A.coordinates(100, true, "rgb(255, 165, 0)"); // Show coorfinates number
 ```
 
 ### Clean canvas: clean(x, y, width, heigh);

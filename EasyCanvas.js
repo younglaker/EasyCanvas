@@ -471,48 +471,41 @@
       var x = cs_width / grid_width;
       var y = cs_height / grid_width;
 
+
+      for (var i = 0; i <= x; i++) { //绘制列
+        this.line({
+          basic: [
+            [i * grid_width, 0],
+            [i * grid_width, y * grid_width]
+          ]
+        });
+      }
+
+      for (var i = 0; i <= y; i++) { //绘制行
+        this.line({
+          basic: [
+            [0, i * grid_width],
+            [x * grid_width, i * grid_width]
+          ]
+        });
+      }
+
+
+
       if (coodiful) {
         for (var i = 0; i <= x; i++) { //绘制列
-          this.line({
-            basic: [
-              [i * grid_width, 0],
-              [i * grid_width, y * grid_width]
-            ]
-          }).text({
+          this.text({
             basic: [i * grid_width, 10, i * grid_width],
             fontColor: color
           });
         }
 
         for (var i = 0; i <= y; i++) { //绘制行
-          this.line({
-            basic: [
-              [0, i * grid_width],
-              [x * grid_width, i * grid_width]
-            ]
-          }).text({
+          this.text({
             basic: [10, i * grid_width, i * grid_width],
           });
         }
 
-      } else {
-        for (var i = 0; i <= x; i++) { //绘制列
-          this.line({
-            basic: [
-              [i * grid_width, 0],
-              [i * grid_width, y * grid_width]
-            ]
-          });
-        }
-
-        for (var i = 0; i <= y; i++) { //绘制行
-          this.line({
-            basic: [
-              [0, i * grid_width],
-              [x * grid_width, i * grid_width]
-            ]
-          });
-        }
       }
 
       return this;

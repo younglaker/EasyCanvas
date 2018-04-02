@@ -11,7 +11,7 @@
     });*/
 // console.log("====");
 var b = new EasyCanvas("canvas2");
-b.coordinates();
+b.coordinates(100, true);
 
 
 $("#save_canvas").click(function() {
