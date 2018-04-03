@@ -59,7 +59,7 @@ Welcome to join us~
 | height | The height of canvas | var h = A.height; |
 
 ## Drawing
-### Line: line()
+### line(): Draw line
 
 - **Usage of 'basic':**
 
@@ -97,7 +97,7 @@ Welcome to join us~
     });
 ```
 
-### Arc: arc()
+### arc(): Draw arc
 
 - **Usage of 'basic':**
 
@@ -159,7 +159,7 @@ Welcome to join us~
     });
 ```
 
-### Bezier curve: bezier()
+### bezier(): Draw bezier curve
 
 ```
     basic: [startX, startY, control1X, control1Y, control2X, control2Y, endX, endY]
@@ -190,7 +190,7 @@ Welcome to join us~
     });
 ```
 
-### Rectangle: rect()
+### rect(): Draw rectangle
 
 - **Usage of 'basic':**
 
@@ -219,7 +219,7 @@ Welcome to join us~
     }
 ```
 
-### Foursquare: square()
+### square(): Draw Foursquare
 
 - **Usage of 'basic':**
 
@@ -280,7 +280,7 @@ basic: [x, y, text, maxWidth]
 ```
 
 ## Layer
-### Reference line: coordinates(grid_width, coodiful, color)
+### coordinates(grid_width, coodiful, color): Draw reference line
 
 Draw grids of canvas in order to draw canvas more easily.
 
@@ -335,7 +335,7 @@ Draw grids of canvas in order to draw canvas more easily.
 ```
 
 
-### Save canvas to image: toImg(save_btn_id, img_name);
+### toImg(save_btn_id, img_name): Save canvas to image
 
 Save canvas to png image.
 
