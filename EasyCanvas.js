@@ -1,6 +1,22 @@
 ;
 (function(window) {
 
+  CanvasRenderingContext2D.prototype.clear = function() {
+    this.save();
+    this.globalCompositeOperation = 'destination-out';
+    this.fillStyle = 'black';
+    this.fill();
+    this.restore();
+  };
+
+  // Add clearArc() to CanvasRenderingContext2D
+  CanvasRenderingContext2D.prototype.clearArc = function(x, y, radius, startAngle, endAngle, anticlockwise) {
+    this.beginPath();
+    this.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+    this.clear();
+  };
+
+
   window.EasyCanvas = EasyCanvas = function(selector, root_id, tag) {
     return new CanvasObj(selector, root_id, tag);
   };
@@ -11,8 +27,8 @@
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.defaults = {
+      acw: false,
       basic: false,
-      ccw: false,
       closed: false,
       endAngle: 2 * Math.PI,
       fillColor: "transparent",
@@ -65,8 +81,8 @@
   };
 
   var g_defaults = {
+    acw: false,
     basic: false,
-    ccw: false,
     closed: false,
     endAngle: 2 * Math.PI,
     fillColor: "transparent",
@@ -274,7 +290,7 @@
       for (var i = 0; i < Object.keys(bs).length; i++) {
         var basic = bs["basic" + i];
 
-        // Counterclockwise
+        // anti-clockwise
         if (basic[5] === undefined) {
           basic[5] = false;
         }
@@ -471,7 +487,6 @@
       var x = cs_width / grid_width;
       var y = cs_height / grid_width;
 
-
       for (var i = 0; i <= x; i++) { //绘制列
         this.line({
           basic: [
@@ -489,8 +504,6 @@
           ]
         });
       }
-
-
 
       if (coodiful) {
         for (var i = 0; i <= x; i++) { //绘制列
@@ -514,7 +527,7 @@
     /*
      *  Clean the whole or a part of canvas
      */
-    clean: function() {
+    cleanRect: function() {
       if (arguments[0]) {
         this.ctx.clearRect(arguments[0], arguments[1], arguments[2], arguments[3]);
       } else {
@@ -525,14 +538,27 @@
     },
 
     /*
+     *  Clean the a arc part of canvas
+     */
+    cleanArc: function(x, y, radius, startAngle, endAngle, anticlockwise) {
+      if (arguments[0]) {
+        this.ctx.clearArc(x, y, radius, startAngle, endAngle, anticlockwise);
+      }
+
+      return this;
+    },
+
+    /*
      *  Sav canvas to image
      */
     toImg: function(save_btn_id, img_name) {
-      var button = document.getElementById(save_btn_id);
-      img_name = img_name || "mypainting";
-      canvas = this.canvas;
-      button.href = canvas.toDataURL("image/png", 1.0);
-      button.download = img_name;
+      if (save_btn_id) {
+        var button = document.getElementById(save_btn_id);
+        img_name = img_name || "mypainting";
+        canvas = this.canvas;
+        button.href = canvas.toDataURL("image/png", 1.0);
+        button.download = img_name;
+      }
 
       return this;
     }

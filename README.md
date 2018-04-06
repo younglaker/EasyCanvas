@@ -110,7 +110,7 @@ Welcome to join us~
 | x, y | Number |  | The coordinate of the center of the circle. |
 | radius | Number |  | The radius of the circle. |
 | startAngle, endAngle | Radians |  | The starting and ending angle in radians.(起始角/结束角，以弧度计。) |
-| ccw | "false": clockwise<br>"true": counter-clockwise. | "false" | Counterclockwise.<br>(规定应该逆时针还是顺时针绘图) |
+| acw | "false": clockwise<br>"true": anti-clockwise. | "false" | Anti-clockwise.<br>(规定应该逆时针还是顺时针绘图) |
 
 - **Example:**
 
@@ -304,7 +304,7 @@ Draw grids of canvas in order to draw canvas more easily.
     A.coordinates(100, true, "rgb(255, 165, 0)"); // Show coorfinates number
 ```
 
-### Clean canvas: clean(x, y, width, heigh);
+### cleanRect(x, y, width, heigh): Clean canvas in rectangle shape
 
 | Property | Value  | Default  |   Description  |
 |---|---|---|---|
@@ -335,13 +335,22 @@ Draw grids of canvas in order to draw canvas more easily.
 ```
 
 
+### cleanArc(x, y, radius, startAngle, endAngle, anticlockwise): Clean canvas in arc shape
+
+| Property | Value  | Default  | Required |   Description  |
+|---|---|---|---|---|
+| x, y | Number | | Y | The coordinate of start point |
+| startAngle, endAngle | Radians | | Y | The start and end angle |
+| anticlockwise | "false": clockwise<br>"true": anti-clockwise. | false | N | Anti-clockwise |
+
+
 ### toImg(save_btn_id, img_name): Save canvas to image
 
 Save canvas to png image.
 
 | Property | Value  | Default | Required |   Description  |
-|---|---|---|---|
-| save_btn_id | String | | Yes | The id of save button( using <a> tag, not <button>) |
+|---|---|---|---|---|
+| save_btn_id | String | | Y | The id of save button( using <a> tag, not <button>) |
 | img_name | String | "mypainting" | | The name of saving image |
 
 
@@ -371,7 +380,7 @@ Save canvas to png image.
 ## Improvements
 
 - [x] Continuously drawing
-- [ ] clean() function seperate to cleanReact() and cleanArc()
+- [x] clean() function seperate to cleanReact() and cleanArc()
 
 ## Bugs
 - [ ] Can't set font weight, it doesn't work

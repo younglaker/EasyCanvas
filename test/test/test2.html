@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
 </head>
+
 <body onload="">
-    <div class="main">
-        <canvas id="canvas" width="550" height="500"></canvas>
-    </div>
-    <script type="text/javascript">
-		canvas = document.getElementById("canvas");
-		ctx = canvas.getContext("2d");
+  <div class="main">
+    <canvas id="canvas" width="550" height="500"></canvas>
+  </div>
+  <script type="text/javascript">
+ CanvasRenderingContext2D.prototype.clear = function() { this.save(); this.globalCompositeOperation = 'destination-out'; this.fillStyle = 'black'; this.fill(); this.restore(); }; CanvasRenderingContext2D.prototype.clearArc = function(x, y, radius, startAngle, endAngle, anticlockwise) { this.beginPath(); this.arc(x, y, radius, startAngle, endAngle, anticlockwise); this.clear(); };  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
 
-		ctx.beginPath();
+  ctx.beginPath();
 
-		ctx.moveTo(25, 50);
-		ctx.bezierCurveTo( 175, 50, 25, 150, 175, 150);
+  ctx.moveTo(25, 50);
+  ctx.bezierCurveTo(175, 50, 25, 150, 175, 150);
 
-		// ctx.fill();
-		ctx.stroke();
-		ctx.closePath();
-    </script>
+  // ctx.fill();
+  ctx.stroke();
+  ctx.closePath();
+
+
+  var img = new Image();
+  img.addEventListener('load', function() {
+    ctx.drawImage(img, 0, 0, img.width, img.height, 50, 50, 365, 365);
+
+    ctx.clearArc(180, 195, 10, 0, Math.PI * 2, false);
+    ctx.clearArc(236, 195, 10, 0, Math.PI * 2, false);
+    ctx.clearArc(207, 254, 24, 0, Math.PI, false);
+
+  }, false);
+  img.src = 'http://jsrun.it/assets/6/Y/7/c/6Y7cP.jpg';
+  </script>
 </body>
+
 </html>
