@@ -329,3 +329,4 @@ Draw the coordinate of canvas in order to use canvas easierly.
 - [x] Continuously drawing
 
 ## Bugs
+- [ ] Can't set font weight, it doesn't work
