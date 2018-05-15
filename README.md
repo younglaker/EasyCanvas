@@ -327,6 +327,7 @@ Draw the coordinate of canvas in order to use canvas easierly.
 ## Improvements
 
 - [x] Continuously drawing
+- [ ] clean() function seperate to cleanReact() and cleanArc()
 
 ## Bugs
 - [ ] Can't set font weight, it doesn't work
