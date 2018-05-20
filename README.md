@@ -161,6 +161,8 @@ Welcome to join us~
 
 ### bezier(): Draw bezier curve
 
+- **Usage of 'basic':**
+`
 ```
     basic: [startX, startY, control1X, control1Y, control2X, control2Y, endX, endY]
     basic: [
@@ -288,7 +290,7 @@ Draw grids of canvas in order to draw canvas more easily.
 |---|---|---|---|
 | grid_width | Number  | 50  | The width of each grid  |
 | coodiful | Bool  | false  | Whether show the coordinate number |
-| color | Css color  | "#000"  | The color of line and text  |
+| color | CSS color  | "#000"  | The color of line and text  |
 
 - **Example:**
 
@@ -314,8 +316,8 @@ Draw grids of canvas in order to draw canvas more easily.
 - **Usage**
 
 ```
-    clean() : Clean the whole canvas
-    clean(x, y, width, heigh) : Clean some parts
+    cleanRect() : Clean the whole canvas
+    cleanRect(x, y, width, heigh) : Clean some parts
 ```
 
 - **Example:**
@@ -325,13 +327,13 @@ Draw grids of canvas in order to draw canvas more easily.
         basic: [10, 50, 300, 100],
         fillColor: "#000"
     })
-    .clean();  // Clean the whole canvas
+    .cleanRect();  // Clean the whole canvas
 
     A.rect({
         basic: [10, 50, 300, 100],
         fillColor: "#000"
     })
-    .clean(20, 20, 100, 100);  // Clean some parts
+    .cleanRect(20, 20, 100, 100);  // Clean some parts
 ```
 
 
@@ -343,6 +345,19 @@ Draw grids of canvas in order to draw canvas more easily.
 | startAngle, endAngle | Radians | | Y | The start and end angle |
 | anticlockwise | "false": clockwise<br>"true": anti-clockwise. | false | N | Anti-clockwise |
 
+```
+    cleanArc(x, y, width, heigh) : Clean some parts
+```
+
+- **Example:**
+
+```
+    A.clean(100, 100, 30, 0, Math.PI);  // Clean half of a circle
+
+    A.clean(100, 100, 30, 0, Math.PI * 2);  // Clean a circle
+
+    A.clean(100, 100, 30, 10, Math.PI, true);
+```
 
 ### toImg(save_btn_id, img_name): Save canvas to image
 
@@ -350,9 +365,15 @@ Save canvas to png image.
 
 | Property | Value  | Default | Required |   Description  |
 |---|---|---|---|---|
-| save_btn_id | String | | Y | The id of save button( using <a> tag, not <button>) |
-| img_name | String | "mypainting" | | The name of saving image |
+| save_btn_id | String | | Y | The id of save button( using `<a>` tag, not `<button>`) |
+| img_name | String | "mypainting" | N | The name of saving image |
 
+- **Usage**
+
+```
+    clean() : Clean the whole canvas
+    clean(x, y, width, heigh) : Clean some parts
+```
 
 - **Example:**
 

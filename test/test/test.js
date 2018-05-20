@@ -179,7 +179,7 @@ b.quadratic({
   // closed: true
 });
 
-b.cleanArc(100, 100, 30, 0, Math.PI * 2, false);
+b.cleanArc(100, 100, 30, 0, Math.PI * 2);
 
 /*    b.bezier({
         color: "#0000ff",
