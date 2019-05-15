@@ -11,24 +11,51 @@
     });*/
 // console.log("====");
 var b = new EasyCanvas("canvas2");
-b.coordinates(100, true);
+
+/*b.rect({
+    basic: [10, 50, 300, 200],
+    fillColor: "#000"
+})
+.cleanArc(100, 100, 60, 0, Math.PI);*/
 
 
-$("#save_canvas").click(function() {
 
-  b.toImg('save_canvas', $("#pic_name").val());
+
+
+
+
+    b.bezier({
+        color: "#0000ff",
+        // basic: [25, 50, 175, 50, 25, 150, 175, 150],
+        lineWidth:3,
+        basic: [
+                [40, 80, 175, 50, 25, 150, 100, 150],
+                [150, 150, 125, 1, 300, 150]
+               ],
+               strokeColor:"#3D34CF"
 });
 
 
 
+
+
+
+
+/*$("#save_canvas").click(function() {
+
+  b.toImg('save_canvas', $("#pic_name").val());
+});*/
+
+
+
 /*    b.line({
-        basic1: [[10, 100], [200, 100], [10, 200]],
-        basic: [[20, 100], [300, 100], [20, 200]],
-        lineCap: "round",
-        lineJoin: "round",
-        lineWidth: 10,
-        fillColor: "rgb(255, 165, 0)",
-        strokeColor: "#00f",
+        basic: [[20, 100], [200, 160]],
+        basic1: [[200, 100], [200, 100]],
+        // lineCap: "round",
+        // lineJoin: "round",
+        lineWidth: 5,
+        // fillColor: "rgb(255, 165, 0)",
+        strokeColor: "#000",
         // strokeLinerGradient: [0, 0, 170, 0],
         // stop: [[0, "black"], [0.5,"blue"], [1,"red"]],
         closed: true
@@ -56,12 +83,16 @@ $("#save_canvas").click(function() {
     });*/
 
 /*    b.rect({
-        basic: [10, 50, 300, 100],
-        basic1: [40, 80, 300, 100],
+        // basic: [10, 50, 200, 100],
+        basic: [10, 50, 200, 150],
+        lineWidth: 3,
+        strokeColor: '#34CFA9',
+        // fillColor: "#6DCF34",
+        // basic1: [40, 80, 300, 100],
         // points: [10, 50],
         // rectWidth: 300,
         // rectHeight: 200,
-        fillRradialGradient: [75, 50, 5, 90, 60, 100]
+        // fillRradialGradient: [75, 50, 5, 90, 60, 100]
     });*/
 
 /*    for (var i = 10; i < 50; i = i + 10) {
@@ -72,10 +103,12 @@ $("#save_canvas").click(function() {
 
 /*    b.square({
         basic: [40, 80, 100],
-        basic1: [50, 90, 100],
-        fillColor: "#000"
+        lineWidth:10,
+        strokeColor: '#349BCF',
+        // basic1: [50, 90, 100],
+        // fillColor: "#000"
         // points: [80, 60],
-        // rectWidth: 300  
+        // rectWidth: 300
     });*/
 
 /*    b.rect({
@@ -83,12 +116,12 @@ $("#save_canvas").click(function() {
     })
     .clean(20, 20, 100, 100);*/
 
-b.text({
+/*b.text({
   basic: [10, 100, "basic"],
   basic1: [10, 130, "basic1"]
-  // points: [[0, 100]],
-  // text: "alphabetic",
-});
+  points: [[0, 100]],
+  text: "alphabetic",
+});*/
 
 /*    b.line({
         points: [[150, 20], [150, 170]]
@@ -152,34 +185,38 @@ b.text({
         text: "bottom",
         textBaseline: "bottom",
     });*/
-
+/*
 b.arc({
   shadow: [0, 0, 7, "#f00"],
-  strokeColor: "#0000ff",
+  strokeColor: "#00f",
+  lineWidth: 5,
   // basic: [50, 50, 50, 0, Math.PI],
-  basic1: [60, 60, 60, 0, Math.PI],
-  basic: [100, 100, 60, 0, Math.PI]
+  // basic1: [60, 60, 60, 0, Math.PI],
+  basic: [100, 100, 60, 0, 2*Math.PI],
+  // basic1: [220, 100, 60, Math.PI, 2*Math.PI],
   // points: [],
   // radius: 50,
-  // startAngle: 50, 
+  // startAngle: 50,
   // endAngle: Math.PI,
   // ccw: false
-});
-
+});*/
+/*
 b.quadratic({
-  shadow: [1, 1, 7, "#0f0"],
+  // shadow: [1, 1, 7, "#0f0"],
   color: "#0000ff",
   shadowColor: "#000",
-  basic: [60, 20, 20, 100, 200, 10],
-  basic1: [
-    [10, 10, 10, 100, 100, 150],
-    [40, 100, 250, 30],
-    [50, 120, 300, 60]
-  ],
+  lineWidth: 3,
+  basic: [60, 120, 20, 10, 200, 50],
+  fillColor: "#FFA833"
+  // basic1: [
+  //   [10, 10, 10, 100, 100, 150],
+  //   [40, 100, 250, 30],
+  //   [50, 120, 300, 60]
+  // ],
   // closed: true
-});
+});*/
 
-b.cleanArc(100, 100, 30, 0, Math.PI * 2);
+// b.cleanArc(100, 100, 30, 0, Math.PI * 2);
 
 /*    b.bezier({
         color: "#0000ff",

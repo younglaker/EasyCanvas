@@ -30,8 +30,8 @@ Welcome to join us~
 | lineJoin |  "bevel"(斜角),<br>"round"(圆角),<br>"miter"(尖角) | "miter"  | The type of corner created, when two lines meet<br>(两条线相交时，所创建的拐角类型)  |
 | lineWidth  | Number  | 1 | Line width<br>(线条宽度)  |
 | shadow  |  [Number, Number, Number, Color] | [1, 1, 1, "#fff"] | Shadow, [shadowX, shadowY, shadowBlur, shadowColor] |
-| shadowX |  Number |  | Vertical shadow |
-| shadowY |  Number |  | Horizontal shadow |
+| shadowX |  Number |  | Horizontal shadow |
+| shadowY |  Number |  | Vertical shadow |
 | shadowBlur |  Number |  | Shadow blur |
 | shadowColor |  Color |  | Shadow color |
 | strokeColor | Color  |  "#000" |  Outer line color for shape and text<br>(图形或文本描边的颜色)   |
@@ -77,10 +77,10 @@ Welcome to join us~
 
 ```
     A.line({
-        basic: [[10, 100], [200, 100], [10, 200]]
+        basic: [[10, 100], [200, 100], [10, 200]],
         lineCap: "round",
         lineWidth: 10,
-        fillColor: "rgb(255,165,0)",
+        fillColor: "rgb(255,165,0)"
     });
 
     A.line({
@@ -102,7 +102,7 @@ Welcome to join us~
 - **Usage of 'basic':**
 
 ```
-    basic: [x, y, radius, startAngle, endAngle, ccw]
+    basic: [x, y, radius, startAngle, endAngle, acw]
 ```
 
 | Property | Value  | Default  |   Description  |
@@ -271,7 +271,7 @@ basic: [x, y, text, maxWidth]
 ```
     A.text({
         basic: [10, 100, "basic"],
-        basic1: [10, 130, "basic1"]
+        basic1: [10, 130, "basic1"],
         lineWidth: 10,
         shadow: [1, 1, 7, "#0f0"],
         linerGridient: [0, 0, 170, 0],
@@ -330,10 +330,10 @@ Draw grids of canvas in order to draw canvas more easily.
     .cleanRect();  // Clean the whole canvas
 
     A.rect({
-        basic: [10, 50, 300, 100],
+        basic: [10, 50, 300, 200],
         fillColor: "#000"
     })
-    .cleanRect(20, 20, 100, 100);  // Clean some parts
+    .cleanRect(20, 70, 150, 100);  // Clean some parts
 ```
 
 
@@ -352,11 +352,17 @@ Draw grids of canvas in order to draw canvas more easily.
 - **Example:**
 
 ```
-    A.clean(100, 100, 30, 0, Math.PI);  // Clean half of a circle
+    A.cleanArc(100, 100, 30, 0, Math.PI);  // Clean half of a circle
 
-    A.clean(100, 100, 30, 0, Math.PI * 2);  // Clean a circle
+    A.cleanArc(100, 100, 30, 0, Math.PI * 2);  // Clean a circle
 
-    A.clean(100, 100, 30, 10, Math.PI, true);
+    A.cleanArc(100, 100, 30, 10, Math.PI, true);
+
+    A.rect({
+        basic: [10, 50, 300, 200],
+        fillColor: "#000"
+    })
+    .cleanArc(100, 100, 60, 0, Math.PI);
 ```
 
 ### toImg(save_btn_id, img_name): Save canvas to image
@@ -371,8 +377,7 @@ Save canvas to png image.
 - **Usage**
 
 ```
-    clean() : Clean the whole canvas
-    clean(x, y, width, heigh) : Clean some parts
+    toImg(save_btn_id, img_name)
 ```
 
 - **Example:**
